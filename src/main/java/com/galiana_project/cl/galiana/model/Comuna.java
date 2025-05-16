@@ -18,12 +18,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "comuna")
 public class Comuna {
-     @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(name = "nombre", nullable = false,length = 50)
+    @Column(nullable = false,length = 25)
     private String nombre;
     @ManyToOne
-    @JoinColumn(name = "region_id")
-    private Region region;
+    @JoinColumn(name = "ciudad_id")
+    private Ciudad comuna;
 }
