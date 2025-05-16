@@ -21,9 +21,9 @@ public class Comuna {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(nullable = false,length = 25)
+    @Column(nullable = false, length = 25)
     private String nombre;
     @ManyToOne
     @JoinColumn(name = "ciudad_id")
-    private Ciudad comuna;
+    private Ciudad ciudad;
 }
