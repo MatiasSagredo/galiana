@@ -1,4 +1,4 @@
-package com.galiana_project.cl.galiana;
+package com.galiana_project.cl.galiana_project;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
