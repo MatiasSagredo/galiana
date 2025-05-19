@@ -13,7 +13,7 @@ public interface ObraRepository extends JpaRepository<Obra, Long> {
         @Query("""
                         SELECT obra.nombre, obra.horario, obra.precio FROM Obra obra
                         """)
-        List<Object[]> findObrasConNombreHorarioPrecio();
+        List<Obra> findObrasConNombreHorarioPrecio();
 
         @Query("""
                         SELECT obra FROM Obra obra
@@ -25,6 +25,6 @@ public interface ObraRepository extends JpaRepository<Obra, Long> {
                         SELECT o FROM Obra o
                         WHERE o.director.id = :id
                         """)
-        List<Obra> findObrasFromDirectorId(Long id);
+        List<Obra> findObrasDelDirectorId(Long id);
 
 }

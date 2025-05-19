@@ -78,4 +78,13 @@ public class TeatroController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @GetMapping("/comuna/{id}")
+    public ResponseEntity<List<Teatro>> listarTeatrosDeComuna(@PathVariable Long id) {
+        List<Teatro> teatros = teatroService.findTeatrosFromComuna(id);
+        if (teatros.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(teatros);
+    }
 }

@@ -79,9 +79,9 @@ public class ObraController {
         }
     }
 
-    @GetMapping("/obras_director/{id}")
+    @GetMapping("/director/{id}")
     public ResponseEntity<List<Obra>> listarObrasDeDirector(@PathVariable Long id) {
-        List<Obra> obras = obraService.findObrasFromDirectorId(id);
+        List<Obra> obras = obraService.findObrasDelDirectorId(id);
         if (obras.isEmpty()) {
             return ResponseEntity.noContent().build();
         }

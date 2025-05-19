@@ -7,5 +7,4 @@ import com.galiana_project.cl.galiana_project.model.Usuario;
 
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-
 }

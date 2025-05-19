@@ -80,7 +80,7 @@ public class ObraService {
         }
     }
 
-    public List<Obra> findObrasFromDirectorId(Long id) {
-        return obraRepository.findObrasFromDirectorId(id);
+    public List<Obra> findObrasDelDirectorId(Long id) {
+        return obraRepository.findObrasDelDirectorId(id);
     }
 }

@@ -57,4 +57,7 @@ public class TeatroService {
         return teatroRepository.save(teatroToUpdate);
     }
 
+    public List<Teatro> findTeatrosFromComuna(Long id) {
+        return teatroRepository.findTeatrosFromComuna(id);
+    }
 }
