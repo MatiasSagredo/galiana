@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
-@RequestMapping
+@RequestMapping("/api/v1/directores")
 public class DirectorController {
     @Autowired
     private DirectorService directorService;
