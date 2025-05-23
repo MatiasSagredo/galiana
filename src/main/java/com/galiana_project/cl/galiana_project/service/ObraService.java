@@ -4,10 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.galiana_project.cl.galiana_project.model.Obra;
 import com.galiana_project.cl.galiana_project.repository.ObraRepository;
-
 import jakarta.transaction.Transactional;
 
 @Service

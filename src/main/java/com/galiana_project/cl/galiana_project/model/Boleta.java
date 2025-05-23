@@ -23,7 +23,7 @@ public class Boleta {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false) // sera unique?
+    @Column(nullable = false) 
     private Date fechaBoleta;
 
     @Column(nullable = false, length = 6)

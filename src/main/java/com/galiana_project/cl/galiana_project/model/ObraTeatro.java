@@ -19,7 +19,7 @@ import jakarta.persistence.ManyToOne;
 public class ObraTeatro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id; // solo un id o algo mas=???
+    private Integer id; 
 
     @ManyToOne
     @JoinColumn(name = "teatro", nullable = false)

@@ -2,12 +2,9 @@ package com.galiana_project.cl.galiana_project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.galiana_project.cl.galiana_project.model.Boleta;
 import com.galiana_project.cl.galiana_project.repository.BoletaRepository;
-
 import jakarta.transaction.Transactional;
-
 import java.util.List;
 
 @Service
