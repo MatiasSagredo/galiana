@@ -59,10 +59,10 @@ public class AsientoController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<Asiento> actualizarParcial(@PathVariable Long id, @RequestBody Asiento asientoParcial) {
-        Asiento asientoActualizado = asientoService.patchAsiento(id, asientoParcial);
-        if (asientoActualizado != null) {
+        try {
+            Asiento asientoActualizado = asientoService.patchAsiento(id, asientoParcial);
             return ResponseEntity.ok(asientoActualizado);
-        } else {
+        } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
     }

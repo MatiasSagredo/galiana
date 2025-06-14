@@ -60,10 +60,10 @@ public class UsuarioController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<Usuario> actualizarParcial(@PathVariable Long id, @RequestBody Usuario usuarioParcial) {
-        Usuario usuarioActualizado = usuarioService.patchUsuario(id, usuarioParcial);
-        if (usuarioActualizado != null) {
+        try {
+            Usuario usuarioActualizado = usuarioService.patchUsuario(id, usuarioParcial);
             return ResponseEntity.ok(usuarioActualizado);
-        } else {
+        } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
     }

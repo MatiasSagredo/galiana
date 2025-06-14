@@ -60,10 +60,10 @@ public class DirectorController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<Director> actualizarParcial(@PathVariable Long id, @RequestBody Director directorParcial) {
-        Director directorActualizado = directorService.patchDirector(id, directorParcial);
-        if (directorActualizado != null) {
+        try {
+            Director directorActualizado = directorService.patchDirector(id, directorParcial);
             return ResponseEntity.ok(directorActualizado);
-        } else {
+        } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
     }

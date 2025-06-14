@@ -59,10 +59,10 @@ public class BoletaController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<Boleta> actualizarParcial(@PathVariable Long id, @RequestBody Boleta boletaParcial) {
-        Boleta boletaActualizada = boletaService.patchBoleta(id, boletaParcial);
-        if (boletaActualizada != null) {
+        try {
+            Boleta boletaActualizada = boletaService.patchBoleta(id, boletaParcial);
             return ResponseEntity.ok(boletaActualizada);
-        } else {
+        } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
     }

@@ -59,10 +59,10 @@ public class ObraController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<Obra> actualizarParcial(@PathVariable Long id, @RequestBody Obra obraParcial) {
-        Obra obraActualizada = obraService.patchObra(id, obraParcial);
-        if (obraActualizada != null) {
+        try {
+            Obra obraActualizada = obraService.updateObra(id, obraParcial);
             return ResponseEntity.ok(obraActualizada);
-        } else {
+        } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
     }

@@ -59,10 +59,10 @@ public class TeatroController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<Teatro> actualizarParcial(@PathVariable Long id, @RequestBody Teatro teatroParcial) {
-        Teatro teatroActualizado = teatroService.patchTeatro(id, teatroParcial);
-        if (teatroActualizado != null) {
+        try {
+            Teatro teatroActualizado = teatroService.patchTeatro(id, teatroParcial);
             return ResponseEntity.ok(teatroActualizado);
-        } else {
+        } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
     }
@@ -75,14 +75,5 @@ public class TeatroController {
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
-    }
-
-    @GetMapping("/comuna/{id}")
-    public ResponseEntity<List<Teatro>> listarTeatrosDeComuna(@PathVariable Long id) {
-        List<Teatro> teatros = teatroService.findTeatrosFromComuna(id);
-        if (teatros.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(teatros);
     }
 }

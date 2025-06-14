@@ -31,7 +31,7 @@ public class UsuarioService {
     }
 
     public Usuario updateUsuario(Long id, Usuario usuario) {
-        Usuario usuarioToUpdate = usuarioRepository.findById(id).orElse(null);
+        Usuario usuarioToUpdate = usuarioRepository.findById(id).get();
         if (usuarioToUpdate != null) {
             usuarioToUpdate.setNombres(usuario.getNombres());
             usuarioToUpdate.setMail(usuario.getMail());

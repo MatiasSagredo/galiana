@@ -20,4 +20,32 @@ public class CiudadService {
     public Ciudad findById(Long id) {
         return ciudadRepository.findById(id).get();
     }
+
+    public Ciudad save(Ciudad ciudad) {
+        return ciudadRepository.save(ciudad);
+    }
+
+    public void deleteById(Long id) {
+        ciudadRepository.deleteById(id);
+    }
+
+    public Ciudad updateCiudad(Long id, Ciudad ciudad) {
+        Ciudad ciudadToUpdate = ciudadRepository.findById(id).get();
+        if (ciudadToUpdate != null) {
+            ciudadToUpdate.setNombre(ciudad.getNombre());
+            return ciudadRepository.save(ciudadToUpdate);
+        } else {
+            return null;
+        }
+    }
+
+    public Ciudad patchCiudad(Long id, Ciudad ciudadParcial) {
+        Ciudad ciudadToUpdate = ciudadRepository.findById(id).get();
+
+        if (ciudadParcial.getNombre() != null) {
+            ciudadToUpdate.setNombre(ciudadParcial.getNombre());
+        }
+
+        return ciudadRepository.save(ciudadToUpdate);
+    }
 }
