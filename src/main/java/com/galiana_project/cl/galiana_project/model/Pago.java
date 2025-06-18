@@ -20,6 +20,6 @@ public class Pago {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, length = 10)
+    @Column(nullable = false, length = 50)
     private String metodoPago;
 }

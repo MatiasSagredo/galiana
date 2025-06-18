@@ -36,6 +36,7 @@ public class TeatroService {
             teatroToUpdate.setNombre(teatro.getNombre());
             teatroToUpdate.setDireccion(teatro.getDireccion());
             teatroToUpdate.setContacto(teatro.getContacto());
+            teatroToUpdate.setComuna(teatro.getComuna());
             return teatroRepository.save(teatroToUpdate);
         } else {
             return null;
@@ -53,6 +54,9 @@ public class TeatroService {
         }
         if (teatroParcial.getContacto() != null) {
             teatroToUpdate.setContacto(teatroParcial.getContacto());
+        }
+        if (teatroParcial.getComuna() != null) {
+            teatroToUpdate.setComuna(teatroParcial.getComuna());
         }
 
         return teatroRepository.save(teatroToUpdate);

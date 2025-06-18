@@ -1,8 +1,7 @@
 package com.galiana_project.cl.galiana_project.model;
 
-import java.sql.Date;
 import java.sql.Time;
-
+import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -25,7 +24,7 @@ public class Obra {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, length = 25)
+    @Column(nullable = false, length = 50)
     private String nombre;
 
     @Column(nullable = false, length = 20)
@@ -40,7 +39,7 @@ public class Obra {
     @Column(nullable = false, length = 7)
     private Integer precio;
 
-    @Column(nullable = false, length = 70)
+    @Column(nullable = false, length = 150)
     private String descripcion;
 
     @ManyToOne

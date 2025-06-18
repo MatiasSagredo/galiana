@@ -34,6 +34,9 @@ public class BoletaService {
         if (boletaToUpdate != null) {
             boletaToUpdate.setFechaBoleta(boleta.getFechaBoleta());
             boletaToUpdate.setPrecioTotal(boleta.getPrecioTotal());
+            boletaToUpdate.setAsiento(boleta.getAsiento());
+            boletaToUpdate.setUsuario(boleta.getUsuario());
+            boletaToUpdate.setPago(boleta.getPago());
             return boletaRepository.save(boletaToUpdate);
         } else {
             return null;
@@ -48,6 +51,15 @@ public class BoletaService {
         }
         if (boletaParcial.getPrecioTotal() != null) {
             boletaToUpdate.setPrecioTotal(boletaParcial.getPrecioTotal());
+        }
+        if (boletaParcial.getAsiento() != null) {
+            boletaToUpdate.setAsiento(boletaParcial.getAsiento());
+        }
+        if (boletaParcial.getUsuario() != null) {
+            boletaToUpdate.setUsuario(boletaParcial.getUsuario());
+        }
+        if (boletaParcial.getPago() != null) {
+            boletaToUpdate.setPago(boletaParcial.getPago());
         }
 
         return boletaRepository.save(boletaToUpdate);

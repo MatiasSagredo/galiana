@@ -25,5 +25,5 @@ public interface ObraRepository extends JpaRepository<Obra, Long> {
                 WHERE o.director.id = :id
                 """)
         List<Obra> findObrasDelDirectorId(Long id);
-
 }
+

@@ -1,6 +1,6 @@
 package com.galiana_project.cl.galiana_project.model;
 
-import java.sql.Date;
+import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

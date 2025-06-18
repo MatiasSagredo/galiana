@@ -25,7 +25,7 @@ public class DirectorService {
         return directorRepository.save(director);
     }
 
-    public void delete(Long id) {
+    public void deleteById(Long id) {
         directorRepository.deleteById(id);
     }
 

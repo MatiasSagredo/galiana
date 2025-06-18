@@ -25,8 +25,8 @@ public class Asiento {
     @Column(nullable = false, length = 4) 
     private Integer numAsiento;
 
-    @Column(nullable = false, length = 3)
-    private Integer fila;
+    @Column(nullable = false, length = 2)
+    private Character fila;
 
     @Column(nullable = false)
     private Boolean estado;

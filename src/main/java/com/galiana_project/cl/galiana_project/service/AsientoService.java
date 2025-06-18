@@ -36,6 +36,7 @@ public class AsientoService {
             asienToToUpdate.setFila(asiento.getFila());
             asienToToUpdate.setNumAsiento(asiento.getNumAsiento());
             asienToToUpdate.setEstado(asiento.getEstado());
+            asienToToUpdate.setSala(asiento.getSala());
             return asientoRepository.save(asienToToUpdate);
         } else {
             return null;
@@ -53,6 +54,9 @@ public class AsientoService {
         }
         if (asientoParcial.getEstado() != null) {
             asientoToUpdate.setEstado(asientoParcial.getEstado());
+        }
+        if (asientoParcial.getSala() != null) {
+            asientoToUpdate.setSala(asientoParcial.getSala());
         }
 
         return asientoRepository.save(asientoToUpdate);

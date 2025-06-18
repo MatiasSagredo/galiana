@@ -33,6 +33,7 @@ public class CiudadService {
         Ciudad ciudadToUpdate = ciudadRepository.findById(id).get();
         if (ciudadToUpdate != null) {
             ciudadToUpdate.setNombre(ciudad.getNombre());
+            ciudadToUpdate.setRegion(ciudad.getRegion());
             return ciudadRepository.save(ciudadToUpdate);
         } else {
             return null;
@@ -44,6 +45,9 @@ public class CiudadService {
 
         if (ciudadParcial.getNombre() != null) {
             ciudadToUpdate.setNombre(ciudadParcial.getNombre());
+        }
+        if (ciudadParcial.getRegion() != null) {
+            ciudadToUpdate.setRegion(ciudadParcial.getRegion());
         }
 
         return ciudadRepository.save(ciudadToUpdate);

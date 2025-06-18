@@ -1,6 +1,7 @@
 package com.galiana_project.cl.galiana_project.model;
 
-import java.sql.Date; // importa realmente de donde importo esto?
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -41,5 +42,4 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(name = "tipoUsuario", nullable = false)
     private TipoUsuario tipoUsuario;
-
 }

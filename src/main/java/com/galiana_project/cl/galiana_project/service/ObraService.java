@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.galiana_project.cl.galiana_project.model.Obra;
 import com.galiana_project.cl.galiana_project.repository.ObraRepository;
 import jakarta.transaction.Transactional;
@@ -26,7 +27,7 @@ public class ObraService {
         return obraRepository.save(obra);
     }
 
-    public void delete(Long id) {
+    public void deleteById(Long id) {
         obraRepository.deleteById(id);
     }
 
@@ -39,6 +40,8 @@ public class ObraService {
             obraToUpdate.setFechaTermino(obra.getFechaTermino());
             obraToUpdate.setPrecio(obra.getPrecio());
             obraToUpdate.setDescripcion(obra.getDescripcion());
+            obraToUpdate.setDirector(obra.getDirector());
+            obraToUpdate.setObraTeatro(obra.getObraTeatro());
             return obraRepository.save(obraToUpdate);
         } else {
             return null;
@@ -68,6 +71,12 @@ public class ObraService {
             }
             if (obraParcial.getDescripcion() != null) {
                 obraToUpdate.setDescripcion(obraParcial.getDescripcion());
+            }
+            if (obraParcial.getDirector() != null) {
+                obraToUpdate.setDirector(obraParcial.getDirector());
+            }
+            if (obraParcial.getObraTeatro() != null) {
+                obraToUpdate.setObraTeatro(obraParcial.getObraTeatro());
             }
 
             return obraRepository.save(obraToUpdate);

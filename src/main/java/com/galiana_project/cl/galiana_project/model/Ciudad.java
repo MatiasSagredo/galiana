@@ -22,7 +22,7 @@ public class Ciudad {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, length = 25)
+    @Column(nullable = false, length = 40)
     private String nombre;
 
     @ManyToOne

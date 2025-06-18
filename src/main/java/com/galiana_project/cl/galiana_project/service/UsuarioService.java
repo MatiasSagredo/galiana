@@ -2,6 +2,7 @@ package com.galiana_project.cl.galiana_project.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.galiana_project.cl.galiana_project.model.Usuario;
 import com.galiana_project.cl.galiana_project.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
@@ -26,7 +27,7 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
-    public void delete(Long id) {
+    public void deleteById(Long id) {
         usuarioRepository.deleteById(id);
     }
 
@@ -37,6 +38,7 @@ public class UsuarioService {
             usuarioToUpdate.setMail(usuario.getMail());
             usuarioToUpdate.setContraseña(usuario.getContraseña());
             usuarioToUpdate.setFechaNacimiento(usuario.getFechaNacimiento());
+            usuarioToUpdate.setTipoUsuario(usuario.getTipoUsuario());
             return usuarioRepository.save(usuarioToUpdate);
 
         } else {
@@ -65,6 +67,9 @@ public class UsuarioService {
 
             if (usuarioParcial.getFechaNacimiento() != null) {
                 usuarioToUpdate.setFechaNacimiento(usuarioParcial.getFechaNacimiento());
+            }
+            if (usuarioParcial.getTipoUsuario() != null) {
+                usuarioToUpdate.setTipoUsuario(usuarioParcial.getTipoUsuario());
             }
 
             return usuarioRepository.save(usuarioToUpdate);

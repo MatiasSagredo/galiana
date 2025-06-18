@@ -33,6 +33,7 @@ public class ComunaService {
         Comuna comunaToUpdate = comunaRepository.findById(id).get();
         if (comunaToUpdate != null) {
             comunaToUpdate.setNombre(comuna.getNombre());
+            comunaToUpdate.setCiudad(comuna.getCiudad());
             return comunaRepository.save(comunaToUpdate);
         } else {
             return null;
@@ -44,6 +45,9 @@ public class ComunaService {
 
         if (comunaParcial.getNombre() != null) {
             comunaToUpdate.setNombre(comunaParcial.getNombre());
+        }
+        if (comunaParcial.getCiudad() != null) {
+            comunaToUpdate.setCiudad(comunaParcial.getCiudad());
         }
 
         return comunaRepository.save(comunaToUpdate);
