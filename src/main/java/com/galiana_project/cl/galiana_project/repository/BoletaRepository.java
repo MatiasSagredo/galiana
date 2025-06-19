@@ -6,5 +6,5 @@ import com.galiana_project.cl.galiana_project.model.Boleta;
 
 @Repository
 public interface BoletaRepository extends JpaRepository<Boleta, Long> {
-
+    
 }

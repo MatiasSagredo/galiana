@@ -85,4 +85,7 @@ public class ObraController {
         }
         return ResponseEntity.ok(obras);
     }
+    public List<Obra> findObrasDeTeatroDirector(Long teatroId,Long directorId) {
+        
+    }
 }

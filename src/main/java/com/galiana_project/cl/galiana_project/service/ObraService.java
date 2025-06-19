@@ -3,6 +3,7 @@ package com.galiana_project.cl.galiana_project.service;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.galiana_project.cl.galiana_project.model.Obra;
@@ -89,5 +90,8 @@ public class ObraService {
 
     public List<Obra> findObrasDelDirectorId(Long id) {
         return obraRepository.findObrasDelDirectorId(id);
+    }
+    public List<Obra> findObrasDeTeatroDirector(Long teatroId,Long directorId) {
+        return obraRepository.findObrasDeTeatroDirector(teatroId, directorId);
     }
 }

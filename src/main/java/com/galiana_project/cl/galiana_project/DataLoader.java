@@ -9,8 +9,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
-import com.galiana_project.cl.galiana_project.model.*;
-import com.galiana_project.cl.galiana_project.repository.*;
+
+import com.galiana_project.cl.galiana_project.model.Asiento;
+import com.galiana_project.cl.galiana_project.model.Boleta;
+import com.galiana_project.cl.galiana_project.model.Ciudad;
+import com.galiana_project.cl.galiana_project.model.Comuna;
+import com.galiana_project.cl.galiana_project.model.Director;
+import com.galiana_project.cl.galiana_project.model.Obra;
+import com.galiana_project.cl.galiana_project.model.ObraTeatro;
+import com.galiana_project.cl.galiana_project.model.Pago;
+import com.galiana_project.cl.galiana_project.model.Region;
+import com.galiana_project.cl.galiana_project.model.Sala;
+import com.galiana_project.cl.galiana_project.model.Teatro;
+import com.galiana_project.cl.galiana_project.model.TipoUsuario;
+import com.galiana_project.cl.galiana_project.model.Usuario;
+import com.galiana_project.cl.galiana_project.repository.AsientoRepository;
+import com.galiana_project.cl.galiana_project.repository.BoletaRepository;
+import com.galiana_project.cl.galiana_project.repository.CiudadRepository;
+import com.galiana_project.cl.galiana_project.repository.ComunaRepository;
+import com.galiana_project.cl.galiana_project.repository.DirectorRepository;
+import com.galiana_project.cl.galiana_project.repository.ObraRepository;
+import com.galiana_project.cl.galiana_project.repository.ObraTeatroRepository;
+import com.galiana_project.cl.galiana_project.repository.PagoRepository;
+import com.galiana_project.cl.galiana_project.repository.RegionRepository;
+import com.galiana_project.cl.galiana_project.repository.SalaRepository;
+import com.galiana_project.cl.galiana_project.repository.TeatroRepository;
+import com.galiana_project.cl.galiana_project.repository.TipoUsuarioRepository;
+import com.galiana_project.cl.galiana_project.repository.UsuarioRepository;
+
 import net.datafaker.Faker;
 
 @Profile("dev")

@@ -3,6 +3,7 @@ package com.galiana_project.cl.galiana_project.repository;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import com.galiana_project.cl.galiana_project.model.Obra;
 
@@ -25,5 +26,12 @@ public interface ObraRepository extends JpaRepository<Obra, Long> {
                 WHERE o.director.id = :id
                 """)
         List<Obra> findObrasDelDirectorId(Long id);
-}
 
+        @Query("""
+                SELECT o FROM Obra o 
+                JOIN o.obraTeatro.teatro t
+                JOIN o.director d
+                WHERE t.id = :teatroId AND d.id = :directorId
+                """)
+        List<Obra> findObrasDeTeatroDirector(@Param("teatroId")Long teatroId,@Param("directorId")Long directorId);
+}
