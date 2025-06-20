@@ -19,19 +19,20 @@ import jakarta.persistence.GenerationType;
 @NoArgsConstructor
 @Data
 public class Boleta {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false) 
+    @Column(nullable = false)
     private Date fechaBoleta;
 
     @Column(nullable = false, length = 6)
     private Integer precioTotal;
 
     @ManyToOne
-    @JoinColumn(name = "asiento", nullable = false)
-    private Asiento asiento;
+    @JoinColumn(name = "asientoBoleta", nullable = false)
+    private AsientoBoleta asientoBoleta;
 
     @ManyToOne
     @JoinColumn(name = "pago", nullable = false)

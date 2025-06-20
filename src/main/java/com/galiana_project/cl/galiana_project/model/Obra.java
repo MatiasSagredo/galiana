@@ -43,10 +43,6 @@ public class Obra {
     private String descripcion;
 
     @ManyToOne
-    @JoinColumn(name = "obraTeatro", nullable = false)
-    private ObraTeatro obraTeatro;
-
-    @ManyToOne
     @JoinColumn(name = "director", nullable = false)
     private Director director;
 }

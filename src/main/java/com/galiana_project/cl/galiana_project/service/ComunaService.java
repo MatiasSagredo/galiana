@@ -5,13 +5,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.galiana_project.cl.galiana_project.model.Comuna;
 import com.galiana_project.cl.galiana_project.repository.ComunaRepository;
+import com.galiana_project.cl.galiana_project.repository.TeatroRepository;
 import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
 public class ComunaService {
+
     @Autowired
     private ComunaRepository comunaRepository;
+
+    @Autowired
+    private TeatroRepository teatroRepository;
 
     public List<Comuna> findAll() {
         return comunaRepository.findAll();
@@ -26,6 +31,10 @@ public class ComunaService {
     }
 
     public void deleteById(Long id) {
+        Comuna comuna = comunaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Comuna no encontrada"));
+
+        teatroRepository.deleteByComuna(comuna);
         comunaRepository.deleteById(id);
     }
 
@@ -52,5 +61,5 @@ public class ComunaService {
 
         return comunaRepository.save(comunaToUpdate);
     }
-    
+
 }

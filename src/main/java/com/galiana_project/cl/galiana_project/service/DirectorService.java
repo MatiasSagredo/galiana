@@ -5,13 +5,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.galiana_project.cl.galiana_project.model.Director;
 import com.galiana_project.cl.galiana_project.repository.DirectorRepository;
+import com.galiana_project.cl.galiana_project.repository.ObraRepository;
 import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
 public class DirectorService {
+
     @Autowired
     private DirectorRepository directorRepository;
+
+    @Autowired
+    private ObraRepository obraRepository;
 
     public List<Director> findAll() {
         return directorRepository.findAll();
@@ -26,6 +31,10 @@ public class DirectorService {
     }
 
     public void deleteById(Long id) {
+        Director director = directorRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Director no encontrado"));
+
+        obraRepository.deleteByDirector(director);
         directorRepository.deleteById(id);
     }
 

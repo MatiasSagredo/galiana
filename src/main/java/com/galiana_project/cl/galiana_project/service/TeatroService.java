@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.galiana_project.cl.galiana_project.model.Teatro;
+import com.galiana_project.cl.galiana_project.repository.SalaTeatroRepository;
 import com.galiana_project.cl.galiana_project.repository.TeatroRepository;
 import jakarta.transaction.Transactional;
 
@@ -13,6 +14,9 @@ public class TeatroService {
 
     @Autowired
     private TeatroRepository teatroRepository;
+
+    @Autowired
+    private SalaTeatroRepository obraTeatroRepository;
 
     public List<Teatro> findAll() {
         return teatroRepository.findAll();
@@ -27,6 +31,10 @@ public class TeatroService {
     }
 
     public void deleteById(Long id) {
+        Teatro teatro = teatroRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Teatro no encontrado"));
+
+        obraTeatroRepository.deleteByTeatro(teatro);
         teatroRepository.deleteById(id);
     }
 

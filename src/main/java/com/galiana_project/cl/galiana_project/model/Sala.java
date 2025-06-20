@@ -29,6 +29,10 @@ public class Sala {
     private Integer capacidad;
 
     @ManyToOne
-    @JoinColumn(name = "obra", nullable = false)
-    private Obra obra;
+    @JoinColumn(name = "salaTeatro", nullable = false)
+    private SalaTeatro salaTeatro;
+
+    @ManyToOne
+    @JoinColumn(name = "obraSala", nullable = false)
+    private ObraSala obraSala;
 }

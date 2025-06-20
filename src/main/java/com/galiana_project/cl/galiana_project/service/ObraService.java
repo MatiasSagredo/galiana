@@ -3,7 +3,6 @@ package com.galiana_project.cl.galiana_project.service;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.galiana_project.cl.galiana_project.model.Obra;
@@ -13,6 +12,7 @@ import jakarta.transaction.Transactional;
 @Service
 @Transactional
 public class ObraService {
+
     @Autowired
     private ObraRepository obraRepository;
 
@@ -42,7 +42,6 @@ public class ObraService {
             obraToUpdate.setPrecio(obra.getPrecio());
             obraToUpdate.setDescripcion(obra.getDescripcion());
             obraToUpdate.setDirector(obra.getDirector());
-            obraToUpdate.setObraTeatro(obra.getObraTeatro());
             return obraRepository.save(obraToUpdate);
         } else {
             return null;
@@ -76,9 +75,6 @@ public class ObraService {
             if (obraParcial.getDirector() != null) {
                 obraToUpdate.setDirector(obraParcial.getDirector());
             }
-            if (obraParcial.getObraTeatro() != null) {
-                obraToUpdate.setObraTeatro(obraParcial.getObraTeatro());
-            }
 
             return obraRepository.save(obraToUpdate);
 
@@ -90,8 +86,5 @@ public class ObraService {
 
     public List<Obra> findObrasDelDirectorId(Long id) {
         return obraRepository.findObrasDelDirectorId(id);
-    }
-    public List<Obra> findObrasDeTeatroDirector(Long teatroId,Long directorId) {
-        return obraRepository.findObrasDeTeatroDirector(teatroId, directorId);
     }
 }

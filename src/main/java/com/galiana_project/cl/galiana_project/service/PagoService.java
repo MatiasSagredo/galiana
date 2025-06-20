@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.galiana_project.cl.galiana_project.model.Pago;
+import com.galiana_project.cl.galiana_project.repository.BoletaRepository;
 import com.galiana_project.cl.galiana_project.repository.PagoRepository;
 import jakarta.transaction.Transactional;
 
@@ -13,6 +14,9 @@ public class PagoService {
 
     @Autowired
     private PagoRepository pagoRepository;
+
+    @Autowired
+    private BoletaRepository boletaRepository;
 
     public List<Pago> findAll() {
         return pagoRepository.findAll();
@@ -27,6 +31,10 @@ public class PagoService {
     }
 
     public void deleteById(Long id) {
+        Pago pago = pagoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pago no encontrado"));
+
+        boletaRepository.deleteByPago(pago);
         pagoRepository.deleteById(id);
     }
 
@@ -57,5 +65,4 @@ public class PagoService {
         }
     }
 
-    
 }

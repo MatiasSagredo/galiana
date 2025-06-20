@@ -1,4 +1,4 @@
-package com.galiana_project.cl.galiana_project.controller;
+package com.galiana_project.cl.galiana_project.controller.V2;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,13 +54,16 @@ public class ObraTeatroControllerV2 {
     public ResponseEntity<EntityModel<ObraTeatro>> createObraTeatro(@RequestBody ObraTeatro obraTeatro) {
         ObraTeatro newObraTeatro = obraTeatroService.save(obraTeatro);
         return ResponseEntity
-                .created(linkTo(methodOn(ObraTeatroControllerV2.class).getObraTeatroById(newObraTeatro.getId().longValue())).toUri())
+                .created(linkTo(
+                        methodOn(ObraTeatroControllerV2.class).getObraTeatroById(newObraTeatro.getId().longValue()))
+                        .toUri())
                 // .created(linkTo(methodOn(AsientoControllerV2.class).getAsientoById(newAsiento.getId())).toUri())
                 .body(assembler.toModel(newObraTeatro));
     }
 
     @PutMapping(value = "/{id}", produces = MediaTypes.HAL_JSON_VALUE)
-    public ResponseEntity<EntityModel<ObraTeatro>> updateObraTeatro(@PathVariable Long id, @RequestBody ObraTeatro obraTeatro) {
+    public ResponseEntity<EntityModel<ObraTeatro>> updateObraTeatro(@PathVariable Long id,
+            @RequestBody ObraTeatro obraTeatro) {
         obraTeatro.setId(id.intValue());
         // asiento.setId(id);
         ObraTeatro updatedObraTeatro = obraTeatroService.save(obraTeatro);
@@ -69,7 +72,8 @@ public class ObraTeatroControllerV2 {
     }
 
     @PatchMapping(value = "/{id}", produces = MediaTypes.HAL_JSON_VALUE)
-    public ResponseEntity<EntityModel<ObraTeatro>> patchObraTeatro(@PathVariable Long id, @RequestBody ObraTeatro obraTeatro) {
+    public ResponseEntity<EntityModel<ObraTeatro>> patchObraTeatro(@PathVariable Long id,
+            @RequestBody ObraTeatro obraTeatro) {
         ObraTeatro updatedObraTeatro = obraTeatroService.patchObraTeatro(id, obraTeatro);
         if (updatedObraTeatro == null) {
             return ResponseEntity.notFound().build();

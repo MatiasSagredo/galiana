@@ -2,6 +2,8 @@ package com.galiana_project.cl.galiana_project.model;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -34,6 +36,7 @@ public class Usuario {
     private String mail;
 
     @Column(nullable = false, length = 20)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String contraseña;
 
     @Column(nullable = true)
@@ -42,4 +45,5 @@ public class Usuario {
     @ManyToOne
     @JoinColumn(name = "tipoUsuario", nullable = false)
     private TipoUsuario tipoUsuario;
+
 }

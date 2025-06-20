@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.galiana_project.cl.galiana_project.model.Usuario;
+import com.galiana_project.cl.galiana_project.repository.BoletaRepository;
 import com.galiana_project.cl.galiana_project.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import java.util.List;
@@ -12,8 +13,12 @@ import java.util.Optional;
 @Service
 @Transactional
 public class UsuarioService {
+
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private BoletaRepository boletaRepository;
 
     public List<Usuario> findAll() {
         return usuarioRepository.findAll();
@@ -28,6 +33,10 @@ public class UsuarioService {
     }
 
     public void deleteById(Long id) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        boletaRepository.deleteByUsuario(usuario);
         usuarioRepository.deleteById(id);
     }
 

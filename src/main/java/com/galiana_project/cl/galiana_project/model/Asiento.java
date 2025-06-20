@@ -22,7 +22,7 @@ public class Asiento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, length = 4) 
+    @Column(nullable = false, length = 4)
     private Integer numAsiento;
 
     @Column(nullable = false, length = 2)

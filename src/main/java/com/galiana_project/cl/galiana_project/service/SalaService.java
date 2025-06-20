@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.galiana_project.cl.galiana_project.model.Sala;
+import com.galiana_project.cl.galiana_project.repository.AsientoRepository;
 import com.galiana_project.cl.galiana_project.repository.SalaRepository;
 import jakarta.transaction.Transactional;
 
@@ -15,6 +16,9 @@ public class SalaService {
 
     @Autowired
     private SalaRepository salaRepository;
+
+    @Autowired
+    private AsientoRepository asientoRepository;
 
     public List<Sala> findAll() {
         return salaRepository.findAll();
@@ -27,8 +31,12 @@ public class SalaService {
     public Sala save(Sala sala) {
         return salaRepository.save(sala);
     }
-    
+
     public void deleteById(Long id) {
+        Sala sala = salaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Sala no encontrada"));
+
+        asientoRepository.deleteBySala(sala);
         salaRepository.deleteById(id);
     }
 
@@ -38,7 +46,8 @@ public class SalaService {
             salaToUpdate.setId(sala.getId());
             salaToUpdate.setNumSala(sala.getNumSala());
             salaToUpdate.setCapacidad(sala.getCapacidad());
-            salaToUpdate.setObra(sala.getObra());
+            salaToUpdate.setObraSala(sala.getObraSala());
+            salaToUpdate.setSalaTeatro(sala.getSalaTeatro());
             return salaRepository.save(salaToUpdate);
         } else {
             return null;
@@ -58,8 +67,11 @@ public class SalaService {
             if (salaParcial.getCapacidad() != null) {
                 salaToUpdate.setCapacidad(salaParcial.getCapacidad());
             }
-            if (salaParcial.getObra() != null) {
-                salaToUpdate.setObra(salaParcial.getObra());
+            if (salaParcial.getObraSala() != null) {
+                salaToUpdate.setObraSala(salaParcial.getObraSala());
+            }
+            if (salaParcial.getSalaTeatro() != null) {
+                salaToUpdate.setSalaTeatro(salaParcial.getSalaTeatro());
             }
             return salaRepository.save(salaToUpdate);
         } else {
