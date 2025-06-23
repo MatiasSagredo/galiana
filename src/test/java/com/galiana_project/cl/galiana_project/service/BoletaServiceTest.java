@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import com.galiana_project.cl.galiana_project.model.Asiento;
+import com.galiana_project.cl.galiana_project.model.AsientoBoleta;
 import com.galiana_project.cl.galiana_project.model.Boleta;
 import com.galiana_project.cl.galiana_project.model.Pago;
 import com.galiana_project.cl.galiana_project.model.Usuario;
@@ -25,14 +25,14 @@ import com.galiana_project.cl.galiana_project.repository.BoletaRepository;
 @SpringBootTest
 public class BoletaServiceTest {
 
-    @Autowired 
+    @Autowired
     private BoletaService boletaService;
 
-    @MockBean 
+    @MockBean
     private BoletaRepository boletaRepository;
 
     private Boleta createBoleta() {
-        return new Boleta(1, new Date(), 45000, new Asiento(), new Pago(), new Usuario());
+        return new Boleta(1, new Date(), 45000, new AsientoBoleta(), new Pago(), new Usuario());
     }
 
     @Test
@@ -59,7 +59,7 @@ public class BoletaServiceTest {
         assertNotNull(savedBoleta);
         assertEquals(45000, savedBoleta.getPrecioTotal());
     }
-    
+
     @Test
     public void testPatchBoleta() {
         Boleta existingBoleta = createBoleta();
@@ -68,12 +68,12 @@ public class BoletaServiceTest {
 
         when(boletaRepository.findById(1L)).thenReturn(java.util.Optional.of(existingBoleta));
         when(boletaRepository.save(any(Boleta.class))).thenReturn(existingBoleta);
-        
+
         Boleta patchedBoleta = boletaService.patchBoleta(1L, patchData);
         assertNotNull(patchedBoleta);
         assertEquals(1, patchedBoleta.getPrecioTotal());
     }
-    
+
     @Test
     public void testDeleteById() {
         doNothing().when(boletaRepository).deleteById(1L);

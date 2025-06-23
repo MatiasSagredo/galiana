@@ -48,7 +48,6 @@ public class AsientoServiceTest {
         assertEquals(15, asiento.getNumAsiento());
     }
 
-
     @Test
     public void testSave() {
         Asiento asiento = createAsiento();
@@ -57,7 +56,7 @@ public class AsientoServiceTest {
         assertNotNull(savedAsiento);
         assertEquals(15, savedAsiento.getNumAsiento());
     }
-    
+
     @Test
     public void testPatchAsiento() {
         Asiento existingAsiento = createAsiento();
@@ -66,17 +65,17 @@ public class AsientoServiceTest {
 
         when(asientoRepository.findById(1L)).thenReturn(java.util.Optional.of(existingAsiento));
         when(asientoRepository.save(any(Asiento.class))).thenReturn(existingAsiento);
-        
+
         Asiento patchedAsiento = asientoService.patchAsiento(1L, patchData);
         assertNotNull(patchedAsiento);
         assertEquals(13, patchedAsiento.getNumAsiento());
     }
-    
+
     @Test
     public void testDeleteById() {
         doNothing().when(asientoRepository).deleteById(1L);
         asientoService.deleteById(1L);
         verify(asientoRepository, times(1)).deleteById(1L);
     }
-    
+
 }

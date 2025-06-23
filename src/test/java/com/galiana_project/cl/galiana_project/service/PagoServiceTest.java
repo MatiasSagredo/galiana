@@ -21,10 +21,10 @@ import com.galiana_project.cl.galiana_project.repository.PagoRepository;
 @SpringBootTest
 public class PagoServiceTest {
 
-    @Autowired 
+    @Autowired
     private PagoService pagoService;
 
-    @MockBean 
+    @MockBean
     private PagoRepository pagoRepository;
 
     private Pago createPago() {
@@ -55,7 +55,7 @@ public class PagoServiceTest {
         assertNotNull(savedPago);
         assertEquals("Efectivo", savedPago.getMetodoPago());
     }
-    
+
     @Test
     public void testPatchPago() {
         Pago existingPago = createPago();
@@ -64,12 +64,12 @@ public class PagoServiceTest {
 
         when(pagoRepository.findById(1L)).thenReturn(java.util.Optional.of(existingPago));
         when(pagoRepository.save(any(Pago.class))).thenReturn(existingPago);
-        
+
         Pago patchedPago = pagoService.patchPago(1L, patchData);
         assertNotNull(patchedPago);
         assertEquals("Efectivo Actualizado", patchedPago.getMetodoPago());
     }
-    
+
     @Test
     public void testDeleteById() {
         doNothing().when(pagoRepository).deleteById(1L);

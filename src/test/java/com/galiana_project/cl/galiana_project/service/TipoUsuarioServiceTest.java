@@ -21,10 +21,10 @@ import com.galiana_project.cl.galiana_project.repository.TipoUsuarioRepository;
 @SpringBootTest
 public class TipoUsuarioServiceTest {
 
-    @Autowired 
+    @Autowired
     private TipoUsuarioService tipoUsuarioService;
 
-    @MockBean 
+    @MockBean
     private TipoUsuarioRepository tipoUsuarioRepository;
 
     private TipoUsuario createTipoUsuario() {
@@ -55,7 +55,7 @@ public class TipoUsuarioServiceTest {
         assertNotNull(savedTipoUsuario);
         assertEquals("Administrador", savedTipoUsuario.getTipoDeUsuario());
     }
-    
+
     @Test
     public void testPatchTipoUsuario() {
         TipoUsuario existingTeatro = createTipoUsuario();
@@ -64,12 +64,12 @@ public class TipoUsuarioServiceTest {
 
         when(tipoUsuarioRepository.findById(1L)).thenReturn(java.util.Optional.of(existingTeatro));
         when(tipoUsuarioRepository.save(any(TipoUsuario.class))).thenReturn(existingTeatro);
-        
+
         TipoUsuario patchedTipoUsuario = tipoUsuarioService.patchTipoUsuario(1L, patchData);
         assertNotNull(patchedTipoUsuario);
         assertEquals("Administrador Actualizado", patchedTipoUsuario.getTipoDeUsuario());
     }
-    
+
     @Test
     public void testDeleteById() {
         doNothing().when(tipoUsuarioRepository).deleteById(1L);

@@ -20,11 +20,13 @@ import com.galiana_project.cl.galiana_project.repository.RegionRepository;
 
 @SpringBootTest
 public class RegionServiceTest {
-    
-    @Autowired 
+
+    @Autowired
     private RegionService regionService;
 
-    @MockBean // To fix the deprecation of @MockBean, replace it with @Mock from org.mockito and use @ExtendWith(SpringExtension.class) instead of @SpringBootTest for a pure unit test.
+    @MockBean // To fix the deprecation of @MockBean, replace it with @Mock from org.mockito
+              // and use @ExtendWith(SpringExtension.class) instead of @SpringBootTest for a
+              // pure unit test.
     private RegionRepository regionRepository;
 
     private Region createRegion() {
@@ -47,7 +49,6 @@ public class RegionServiceTest {
         assertEquals("Región de Valparaíso", region.getNombre());
     }
 
-
     @Test
     public void testSave() {
         Region region = createRegion();
@@ -56,7 +57,7 @@ public class RegionServiceTest {
         assertNotNull(savedRegion);
         assertEquals("Región de Valparaíso", savedRegion.getNombre());
     }
-    
+
     @Test
     public void testPatchRegion() {
         Region existingRegion = createRegion();
@@ -65,12 +66,12 @@ public class RegionServiceTest {
 
         when(regionRepository.findById(1L)).thenReturn(java.util.Optional.of(existingRegion));
         when(regionRepository.save(any(Region.class))).thenReturn(existingRegion);
-        
+
         Region patchedRegion = regionService.patchRegion(1L, patchData);
         assertNotNull(patchedRegion);
         assertEquals("Región Actualizado", patchedRegion.getNombre());
     }
-    
+
     @Test
     public void testDeleteById() {
         doNothing().when(regionRepository).deleteById(1L);

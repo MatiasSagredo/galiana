@@ -39,7 +39,7 @@ public class CiudadServiceTest {
         assertNotNull(ciudades);
         assertEquals(1, ciudades.size());
     }
-    
+
     @Test
     public void testFindById() {
         when(ciudadRepository.findById(1L)).thenReturn(java.util.Optional.of(createCiudad()));
@@ -65,7 +65,7 @@ public class CiudadServiceTest {
 
         when(ciudadRepository.findById(1L)).thenReturn(java.util.Optional.of(existingCiudad));
         when(ciudadRepository.save(any(Ciudad.class))).thenReturn(existingCiudad);
-        
+
         Ciudad patchedCiudad = ciudadService.patchCiudad(1L, patchData);
         assertNotNull(patchedCiudad);
         assertEquals("Santiago Actualizado", patchedCiudad.getNombre());

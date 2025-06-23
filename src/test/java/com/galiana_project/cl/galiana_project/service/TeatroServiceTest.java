@@ -22,14 +22,15 @@ import com.galiana_project.cl.galiana_project.repository.TeatroRepository;
 @SpringBootTest
 public class TeatroServiceTest {
 
-    @Autowired 
+    @Autowired
     private TeatroService teatroService;
 
-    @MockBean 
+    @MockBean
     private TeatroRepository teatroRepository;
 
     private Teatro createTeatro() {
-        return new Teatro(1, "Teatro Municipal de Santiago", "Agustinas 794, Santiago", "+56 2 2463 5500", new Comuna());
+        return new Teatro(1, "Teatro Municipal de Santiago", "Agustinas 794, Santiago", "+56 2 2463 5500",
+                new Comuna());
     }
 
     @Test
@@ -56,7 +57,7 @@ public class TeatroServiceTest {
         assertNotNull(savedRegion);
         assertEquals("Teatro Municipal de Santiago", savedRegion.getNombre());
     }
-    
+
     @Test
     public void testPatchTeatro() {
         Teatro existingTeatro = createTeatro();
@@ -65,12 +66,12 @@ public class TeatroServiceTest {
 
         when(teatroRepository.findById(1L)).thenReturn(java.util.Optional.of(existingTeatro));
         when(teatroRepository.save(any(Teatro.class))).thenReturn(existingTeatro);
-        
+
         Teatro patchedTeatro = teatroService.patchTeatro(1L, patchData);
         assertNotNull(patchedTeatro);
         assertEquals("Teatro Actualizado", patchedTeatro.getNombre());
     }
-    
+
     @Test
     public void testDeleteById() {
         doNothing().when(teatroRepository).deleteById(1L);

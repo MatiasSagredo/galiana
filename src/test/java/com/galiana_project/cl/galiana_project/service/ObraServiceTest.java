@@ -19,29 +19,27 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 
 import com.galiana_project.cl.galiana_project.model.Director;
 import com.galiana_project.cl.galiana_project.model.Obra;
-import com.galiana_project.cl.galiana_project.model.ObraTeatro;
 import com.galiana_project.cl.galiana_project.repository.ObraRepository;
 
 @SpringBootTest
 public class ObraServiceTest {
 
-    @Autowired 
+    @Autowired
     private ObraService obraService;
 
-    @MockBean 
+    @MockBean
     private ObraRepository obraRepository;
 
     private Obra createObra() {
         return new Obra(
-            1,  
-            "La Casa de Bernarda Alba",
-            Time.valueOf("19:30:00"),
-            new Date(),  // November 15, 2023 (months are 0-based)
-            new Date(),   // December 20, 2023
-            35000,
-            "Drama familiar escrito por Federico García Lorca que explora temas de represión y conflicto en una familia andaluza",
-            new ObraTeatro(),
-            new Director());
+                1,
+                "La Casa de Bernarda Alba",
+                Time.valueOf("19:30:00"),
+                new Date(), // November 15, 2023 (months are 0-based)
+                new Date(), // December 20, 2023
+                35000,
+                "Drama familiar escrito por Federico García Lorca que explora temas de represión y conflicto en una familia andaluza",
+                new Director());
     }
 
     @Test
@@ -68,7 +66,7 @@ public class ObraServiceTest {
         assertNotNull(savedObra);
         assertEquals("La Casa de Bernarda Alba", savedObra.getNombre());
     }
-    
+
     @Test
     public void testPatchObra() {
         Obra existingObra = createObra();
@@ -77,12 +75,12 @@ public class ObraServiceTest {
 
         when(obraRepository.findById(1L)).thenReturn(java.util.Optional.of(existingObra));
         when(obraRepository.save(any(Obra.class))).thenReturn(existingObra);
-        
+
         Obra patchedObra = obraService.patchObra(1L, patchData);
         assertNotNull(patchedObra);
         assertEquals("La Casa Actualizado", patchedObra.getNombre());
     }
-    
+
     @Test
     public void testDeleteById() {
         doNothing().when(obraRepository).deleteById(1L);

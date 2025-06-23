@@ -21,10 +21,10 @@ import com.galiana_project.cl.galiana_project.repository.DirectorRepository;
 
 @SpringBootTest
 public class DirectorServiceTest {
-    @Autowired 
+    @Autowired
     private DirectorService directorService;
 
-    @MockBean 
+    @MockBean
     private DirectorRepository directorRepository;
 
     private Director createDirector() {
@@ -47,7 +47,6 @@ public class DirectorServiceTest {
         assertEquals("Pedro Almodóvar", director.getNombres());
     }
 
-
     @Test
     public void testSave() {
         Director director = createDirector();
@@ -56,7 +55,7 @@ public class DirectorServiceTest {
         assertNotNull(savedDirector);
         assertEquals("Pedro Almodóvar", savedDirector.getNombres());
     }
-    
+
     @Test
     public void testPatchDirector() {
         Director existingDirector = createDirector();
@@ -65,12 +64,12 @@ public class DirectorServiceTest {
 
         when(directorRepository.findById(1L)).thenReturn(java.util.Optional.of(existingDirector));
         when(directorRepository.save(any(Director.class))).thenReturn(existingDirector);
-        
+
         Director patchedDirector = directorService.patchDirector(1L, patchData);
         assertNotNull(patchedDirector);
         assertEquals("Pedro Actualizado", patchedDirector.getNombres());
     }
-    
+
     @Test
     public void testDeleteById() {
         doNothing().when(directorRepository).deleteById(1L);

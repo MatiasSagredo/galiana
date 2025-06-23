@@ -22,10 +22,10 @@ import com.galiana_project.cl.galiana_project.repository.ComunaRepository;
 @SpringBootTest
 public class ComunaServiceTest {
 
-    @Autowired 
+    @Autowired
     private ComunaService comunaService;
 
-    @MockBean 
+    @MockBean
     private ComunaRepository comunaRepository;
 
     private Comuna createComuna() {
@@ -48,7 +48,6 @@ public class ComunaServiceTest {
         assertEquals("Providencia", comuna.getNombre());
     }
 
-
     @Test
     public void testSave() {
         Comuna comuna = createComuna();
@@ -57,7 +56,7 @@ public class ComunaServiceTest {
         assertNotNull(savedComuna);
         assertEquals("Providencia", savedComuna.getNombre());
     }
-    
+
     @Test
     public void testPatchComuna() {
         Comuna existingComuna = createComuna();
@@ -66,12 +65,12 @@ public class ComunaServiceTest {
 
         when(comunaRepository.findById(1L)).thenReturn(java.util.Optional.of(existingComuna));
         when(comunaRepository.save(any(Comuna.class))).thenReturn(existingComuna);
-        
+
         Comuna patchedComuna = comunaService.patchComuna(1L, patchData);
         assertNotNull(patchedComuna);
         assertEquals("Providencia Actualizado", patchedComuna.getNombre());
     }
-    
+
     @Test
     public void testDeleteById() {
         doNothing().when(comunaRepository).deleteById(1L);

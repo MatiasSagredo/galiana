@@ -19,25 +19,25 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import com.galiana_project.cl.galiana_project.model.TipoUsuario;
 import com.galiana_project.cl.galiana_project.model.Usuario;
 import com.galiana_project.cl.galiana_project.repository.UsuarioRepository;
+
 @SpringBootTest
 public class UsuarioServiceTest {
 
-    @Autowired 
+    @Autowired
     private UsuarioService usuarioService;
 
-    @MockBean 
+    @MockBean
     private UsuarioRepository usuarioRepository;
 
     private Usuario createUsuario() {
         return new Usuario(
-            1,
-            "12345678-9", 
-            "Juan Pérez López",
-            "juan.perez@mail.com",
-            "SecurePass123",
-            new Date(),
-            new TipoUsuario()
-        );
+                1,
+                "12345678-9",
+                "Juan Pérez López",
+                "juan.perez@mail.com",
+                "SecurePass123",
+                new Date(),
+                new TipoUsuario());
     }
 
     @Test
@@ -64,7 +64,7 @@ public class UsuarioServiceTest {
         assertNotNull(savedUsuario);
         assertEquals("Juan Pérez López", savedUsuario.getNombres());
     }
-    
+
     @Test
     public void testPatchUsuario() {
         Usuario existingUsuario = createUsuario();
@@ -73,12 +73,12 @@ public class UsuarioServiceTest {
 
         when(usuarioRepository.findById(1L)).thenReturn(java.util.Optional.of(existingUsuario));
         when(usuarioRepository.save(any(Usuario.class))).thenReturn(existingUsuario);
-        
+
         Usuario patchedUsuario = usuarioService.patchUsuario(1L, patchData);
         assertNotNull(patchedUsuario);
         assertEquals("Juan Actualizado", patchedUsuario.getNombres());
     }
-    
+
     @Test
     public void testDeleteById() {
         doNothing().when(usuarioRepository).deleteById(1L);
