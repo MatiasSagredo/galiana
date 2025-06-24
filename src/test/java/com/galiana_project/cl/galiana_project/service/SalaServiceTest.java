@@ -14,8 +14,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-
-import com.galiana_project.cl.galiana_project.model.ObraSala;
 import com.galiana_project.cl.galiana_project.model.Sala;
 import com.galiana_project.cl.galiana_project.model.SalaTeatro;
 import com.galiana_project.cl.galiana_project.repository.SalaRepository;
@@ -30,7 +28,7 @@ public class SalaServiceTest {
     private SalaRepository salaRepository;
 
     private Sala createSala() {
-        return new Sala(1, 101, 120, new SalaTeatro(), new ObraSala());
+        return new Sala(1, 101, 120, new SalaTeatro());
     }
 
     @Test

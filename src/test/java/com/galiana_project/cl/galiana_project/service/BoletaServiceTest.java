@@ -32,7 +32,7 @@ public class BoletaServiceTest {
     private BoletaRepository boletaRepository;
 
     private Boleta createBoleta() {
-        return new Boleta(1, new Date(), 45000, new AsientoBoleta(), new Pago(), new Usuario());
+        return new Boleta(1, new Date(), 45000, new Pago(), new Usuario());
     }
 
     @Test

@@ -122,4 +122,28 @@ public class ObraController {
         }
         return ResponseEntity.ok(obras);
     }
+
+    @GetMapping("/teatro/{teatroId}/director/{directorId}")
+    @Operation(summary = "Obras por teatro y director", description = "Obtiene las obras de un teatro y director específicos")
+    public ResponseEntity<List<Obra>> listarObrasDeTeatroDirector(
+            @PathVariable Long teatroId,
+            @PathVariable Long directorId) {
+        List<Obra> obras = obraService.findObrasDeTeatroDirector(teatroId, directorId);
+        if (obras.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(obras);
+    }
+
+    @GetMapping("/teatro/{teatroId}/comuna/{comunaId}")
+    @Operation(summary = "Obras por teatro y comuna", description = "Obtiene las obras de un teatro y comuna específicos")
+    public ResponseEntity<List<Obra>> listarObrasPorTeatroYComuna(
+            @PathVariable Long teatroId,
+            @PathVariable Long comunaId) {
+        List<Obra> obras = obraService.findObrasPorTeatroYComuna(teatroId, comunaId);
+        if (obras.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(obras);
+    }
 }

@@ -12,7 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-@Table(name = "obraTeatro")
+@Table(name = "asientoBoleta")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data

@@ -115,4 +115,27 @@ public class UsuarioController {
         }
     }
 
+    @GetMapping("/obra/{obraId}/teatro/{teatroId}")
+    @Operation(summary = "Listar usuarios en teatro y obra por ID", description = "Encuentra los usuarios que esten end eterminada obra y teatro")
+    @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Usuarios encontrados exitosamente"),
+            @ApiResponse(responseCode = "204", description = "No hay usuarios disponibles") })
+    public ResponseEntity<List<Usuario>> findUsuariosByObraAndTeatro(@PathVariable Long obraId,
+            @PathVariable Long teatroId) {
+        List<Usuario> usuarios = usuarioService.findUsuariosByObraAndTeatro(obraId, teatroId);
+        if (usuarios.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(usuarios);
+    }
+
+    @GetMapping("/metodoPago/{metodoPago}/obra/{obraId}")
+    public ResponseEntity<List<Usuario>> findUsuariosByObraAndTeatro(@PathVariable String metodoPago,
+            @PathVariable Long obraId) {
+        List<Usuario> usuarios = usuarioService.findUsuariosByMetodoPagoAndObra(metodoPago, obraId);
+        if (usuarios.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(usuarios);
+    }
+
 }

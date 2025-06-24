@@ -87,4 +87,12 @@ public class ObraService {
     public List<Obra> findObrasDelDirectorId(Long id) {
         return obraRepository.findObrasDelDirectorId(id);
     }
+
+    public List<Obra> findObrasDeTeatroDirector(Long teatroId, Long directorId) {
+        return obraRepository.findObrasDeTeatroDirector(teatroId, directorId);
+    }
+
+    public List<Obra> findObrasPorTeatroYComuna(Long teatroId, Long comunaId) {
+        return obraRepository.findObrasPorTeatroYComuna(teatroId, comunaId);
+    }
 }

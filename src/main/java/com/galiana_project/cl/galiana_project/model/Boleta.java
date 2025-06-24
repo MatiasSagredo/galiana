@@ -31,10 +31,6 @@ public class Boleta {
     private Integer precioTotal;
 
     @ManyToOne
-    @JoinColumn(name = "asientoBoleta", nullable = false)
-    private AsientoBoleta asientoBoleta;
-
-    @ManyToOne
     @JoinColumn(name = "pago", nullable = false)
     private Pago pago;
 

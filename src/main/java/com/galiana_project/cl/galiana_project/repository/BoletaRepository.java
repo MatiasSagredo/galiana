@@ -1,5 +1,7 @@
 package com.galiana_project.cl.galiana_project.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,5 +15,9 @@ public interface BoletaRepository extends JpaRepository<Boleta, Long> {
     void deleteByPago(Pago pago);
 
     void deleteByUsuario(Usuario usuario);
+
+    List<Boleta> findByUsuarioIdAndPagoId(Long usuarioId, Long pagoId);
+
+    List<Boleta> findByUsuarioIdAndPrecioTotal(Long usuarioId, Integer precioTotal);
 
 }

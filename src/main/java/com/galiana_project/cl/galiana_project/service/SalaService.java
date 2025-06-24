@@ -46,7 +46,6 @@ public class SalaService {
             salaToUpdate.setId(sala.getId());
             salaToUpdate.setNumSala(sala.getNumSala());
             salaToUpdate.setCapacidad(sala.getCapacidad());
-            salaToUpdate.setObraSala(sala.getObraSala());
             salaToUpdate.setSalaTeatro(sala.getSalaTeatro());
             return salaRepository.save(salaToUpdate);
         } else {
@@ -66,9 +65,6 @@ public class SalaService {
             }
             if (salaParcial.getCapacidad() != null) {
                 salaToUpdate.setCapacidad(salaParcial.getCapacidad());
-            }
-            if (salaParcial.getObraSala() != null) {
-                salaToUpdate.setObraSala(salaParcial.getObraSala());
             }
             if (salaParcial.getSalaTeatro() != null) {
                 salaToUpdate.setSalaTeatro(salaParcial.getSalaTeatro());

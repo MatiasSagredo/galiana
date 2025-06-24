@@ -37,7 +37,6 @@ public class SalaTeatroService {
         if (obraTeatroToUpdate != null) {
             obraTeatroToUpdate.setId(obraTeatro.getId());
             obraTeatroToUpdate.setTeatro(obraTeatro.getTeatro());
-            obraTeatroToUpdate.setSala(obraTeatro.getSala());
             return obraTeatroRepository.save(obraTeatroToUpdate);
         } else {
             return null;
@@ -53,9 +52,6 @@ public class SalaTeatroService {
             }
             if (obraParcial.getTeatro() != null) {
                 obraToUpdate.setTeatro(obraParcial.getTeatro());
-            }
-            if (obraParcial.getSala() != null) {
-                obraToUpdate.setSala(obraParcial.getSala());
             }
             return obraTeatroRepository.save(obraToUpdate);
         } else {

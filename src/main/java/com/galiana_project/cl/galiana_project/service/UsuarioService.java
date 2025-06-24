@@ -88,4 +88,12 @@ public class UsuarioService {
 
         }
     }
+
+    public List<Usuario> findUsuariosByObraAndTeatro(Long obraId, Long teatroId) {
+        return usuarioRepository.findUsuariosByObraAndTeatro(obraId, teatroId);
+    }
+
+    public List<Usuario> findUsuariosByMetodoPagoAndObra(String metodoPago, Long obraId) {
+        return usuarioRepository.findUsuariosByMetodoPagoAndObra(metodoPago, obraId);
+    }
 }
