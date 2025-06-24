@@ -1,6 +1,7 @@
 package com.galiana_project.cl.galiana_project.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
@@ -72,8 +73,41 @@ public class DirectorServiceTest {
 
     @Test
     public void testDeleteById() {
+        Director director = createDirector();
+        when(directorRepository.findById(1L)).thenReturn(java.util.Optional.of(director));
         doNothing().when(directorRepository).deleteById(1L);
         directorService.deleteById(1L);
         verify(directorRepository, times(1)).deleteById(1L);
+    }
+
+    @Test
+    public void testFindByFechaNacimientoBetween() {
+        Date fechaInicio = new Date(0);
+        Date fechaFin = new Date();
+        List<Director> expected = List.of(createDirector());
+        when(directorRepository.findByFechaNacimientoBetween(fechaInicio, fechaFin)).thenReturn(expected);
+
+        List<Director> directores = directorService.findByFechaNacimientoBetween(fechaInicio, fechaFin);
+
+        assertNotNull(directores);
+        assertFalse(directores.isEmpty());
+        assertEquals("Pedro Almodóvar", directores.get(0).getNombres());
+    }
+
+    @Test
+    public void testFindByNombresContainingAndFechaNacimientoBetween() {
+        Date fechaInicio = new Date(0);
+        Date fechaFin = new Date();
+        List<Director> expected = List.of(createDirector());
+        when(directorRepository.findByNombresContainingAndFechaNacimientoBetween("Pedro", fechaInicio, fechaFin))
+                .thenReturn(expected);
+
+        List<Director> directores = directorService.findByNombresContainingAndFechaNacimientoBetween("Pedro",
+                fechaInicio,
+                fechaFin);
+
+        assertNotNull(directores);
+        assertFalse(directores.isEmpty());
+        assertEquals("Pedro Almodóvar", directores.get(0).getNombres());
     }
 }

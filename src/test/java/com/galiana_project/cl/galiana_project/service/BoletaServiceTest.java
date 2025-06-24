@@ -16,7 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import com.galiana_project.cl.galiana_project.model.AsientoBoleta;
 import com.galiana_project.cl.galiana_project.model.Boleta;
 import com.galiana_project.cl.galiana_project.model.Pago;
 import com.galiana_project.cl.galiana_project.model.Usuario;
