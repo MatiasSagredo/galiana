@@ -1,6 +1,7 @@
 package com.galiana_project.cl.galiana_project.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
@@ -78,5 +79,32 @@ public class BoletaServiceTest {
         doNothing().when(boletaRepository).deleteById(1L);
         boletaService.deleteById(1L);
         verify(boletaRepository, times(1)).deleteById(1L);
+    }
+
+    @Test
+    public void testFindByUsuario_IdAndPago_Id() {
+        Long pagoId = 1L;
+        Long usuarioId = 1L;
+        List<Boleta> expected = List.of(createBoleta());
+        when(boletaRepository.findByUsuario_IdAndPago_Id(usuarioId, pagoId)).thenReturn(expected);
+
+        List<Boleta> boletas = boletaService.findByUsuario_IdAndPago_Id(usuarioId, pagoId);
+        assertNotNull(boletas);
+        assertFalse(boletas.isEmpty());
+        assertEquals(45000, boletas.get(0).getPrecioTotal());
+    }
+
+    @Test
+    public void testFindByUsuario_IdAndPrecioTotal() {
+        Integer precioTotal = 45000;
+        Long usuarioId = 1L;
+
+        List<Boleta> expected = List.of(createBoleta());
+        when(boletaRepository.findByUsuario_IdAndPrecioTotal(usuarioId, precioTotal)).thenReturn(expected);
+
+        List<Boleta> boletas = boletaService.findByUsuario_IdAndPrecioTotal(usuarioId, precioTotal);
+        assertNotNull(boletas);
+        assertFalse(boletas.isEmpty());
+        assertEquals(45000, boletas.get(0).getPrecioTotal());
     }
 }
