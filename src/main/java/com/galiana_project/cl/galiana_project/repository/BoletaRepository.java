@@ -16,8 +16,8 @@ public interface BoletaRepository extends JpaRepository<Boleta, Long> {
 
     void deleteByUsuario(Usuario usuario);
 
-    List<Boleta> findByUsuarioIdAndPagoId(Long usuarioId, Long pagoId);
+    List<Boleta> findByUsuario_IdAndPago_Id(Long usuarioId, Long pagoId);
 
-    List<Boleta> findByUsuarioIdAndPrecioTotal(Long usuarioId, Integer precioTotal);
+    List<Boleta> findByUsuario_IdAndPrecioTotal(Long usuarioId, Integer precioTotal);
 
 }

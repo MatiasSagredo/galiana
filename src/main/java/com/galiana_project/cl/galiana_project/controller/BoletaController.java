@@ -114,4 +114,24 @@ public class BoletaController {
         }
     }
 
+    @GetMapping("/usuario/{usuarioId}/pago/{pagoId}")
+    public ResponseEntity<List<Boleta>> findByUsuario_IdAndPago_Id(@PathVariable Long usuarioId,
+            @PathVariable Long pagoId) {
+        List<Boleta> boletas = boletaService.findByUsuario_IdAndPago_Id(usuarioId, pagoId);
+        if (boletas.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(boletas);
+    }
+
+    @GetMapping("/usuario/{usuarioId}/precio/{precioTotal}")
+    public ResponseEntity<List<Boleta>> findByUsuario_IdAndPrecioTotal(@PathVariable Long usuarioId,
+            @PathVariable Integer precioTotal) {
+        List<Boleta> boletas = boletaService.findByUsuario_IdAndPrecioTotal(usuarioId, precioTotal);
+        if (boletas.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(boletas);
+    }
+
 }

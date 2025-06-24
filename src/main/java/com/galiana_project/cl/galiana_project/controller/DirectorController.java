@@ -1,8 +1,10 @@
 package com.galiana_project.cl.galiana_project.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -113,6 +115,30 @@ public class DirectorController {
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/nombres/contiene/{nombres}/fechaNacimiento/inicio/{fechaInicio}/fin/{fechaFin}")
+    public ResponseEntity<List<Director>> findByNombresContainingAndFechaNacimiento(@PathVariable String nombres,
+            @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaInicio,
+            @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaFin) {
+        List<Director> directores = directorService.findByNombresContainingAndFechaNacimientoBetween(nombres,
+                fechaInicio, fechaFin);
+        if (directores.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(directores);
+    }
+
+    @GetMapping("/fechaNacimiento/inicio/{fechaInicio}/fin/{fechaFin}")
+    public ResponseEntity<List<Director>> findByNombresAndFechaNacimientoBetween(
+            @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaInicio,
+            @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date fechaFin) {
+        List<Director> directores = directorService.findByFechaNacimientoBetween(fechaInicio,
+                fechaFin);
+        if (directores.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(directores);
     }
 
 }

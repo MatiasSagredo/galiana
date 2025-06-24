@@ -60,4 +60,12 @@ public class BoletaService {
 
         return boletaRepository.save(boletaToUpdate);
     }
+
+    public List<Boleta> findByUsuario_IdAndPago_Id(Long usuarioId, Long pagoId) {
+        return boletaRepository.findByUsuario_IdAndPago_Id(usuarioId, pagoId);
+    }
+
+    public List<Boleta> findByUsuario_IdAndPrecioTotal(Long usuarioId, Integer precioTotal) {
+        return boletaRepository.findByUsuario_IdAndPrecioTotal(usuarioId, precioTotal);
+    }
 }

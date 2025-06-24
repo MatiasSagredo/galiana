@@ -10,7 +10,7 @@ import com.galiana_project.cl.galiana_project.model.Director;
 @Repository
 public interface DirectorRepository extends JpaRepository<Director, Long> {
 
-    List<Director> findByNombresContainingAndFechaNacimiento(String nombres, Date fechaNacimiento);
+    List<Director> findByNombresContainingAndFechaNacimientoBetween(String nombres, Date fechaInicio, Date fechaFin);
 
-    List<Director> findByNombresAndFechaNacimiento(String nombres, Date fechaNacimiento);
+    List<Director> findByFechaNacimientoBetween(Date fechaInicio, Date fechaFin);
 }

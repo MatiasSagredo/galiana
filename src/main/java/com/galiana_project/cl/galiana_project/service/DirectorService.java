@@ -1,5 +1,6 @@
 package com.galiana_project.cl.galiana_project.service;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,6 +61,15 @@ public class DirectorService {
         }
 
         return directorRepository.save(directorToUpdate);
+    }
+
+    public List<Director> findByNombresContainingAndFechaNacimientoBetween(String nombres, Date fechaInicio,
+            Date fechaFin) {
+        return directorRepository.findByNombresContainingAndFechaNacimientoBetween(nombres, fechaInicio, fechaFin);
+    }
+
+    public List<Director> findByFechaNacimientoBetween(Date fechaInicio, Date fechaFin) {
+        return directorRepository.findByFechaNacimientoBetween(fechaInicio, fechaFin);
     }
 
 }
