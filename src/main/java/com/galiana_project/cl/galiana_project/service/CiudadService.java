@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.galiana_project.cl.galiana_project.model.Ciudad;
+import com.galiana_project.cl.galiana_project.model.Comuna;
 import com.galiana_project.cl.galiana_project.repository.CiudadRepository;
 import com.galiana_project.cl.galiana_project.repository.ComunaRepository;
 import jakarta.transaction.Transactional;
@@ -13,10 +14,17 @@ import jakarta.transaction.Transactional;
 public class CiudadService {
 
     @Autowired
+    private ComunaService comunaService;
+
+    @Autowired
     private CiudadRepository ciudadRepository;
 
     @Autowired
     private ComunaRepository comunaRepository;
+
+    CiudadService(ComunaService comunaService) {
+        this.comunaService = comunaService;
+    }
 
     public List<Ciudad> findAll() {
         return ciudadRepository.findAll();
@@ -34,7 +42,11 @@ public class CiudadService {
         Ciudad ciudad = ciudadRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Ciudad no encontrada"));
 
-        comunaRepository.deleteByCiudad(ciudad);
+        List<Comuna> comunas = comunaRepository.findByCiudad(ciudad);
+
+        for (Comuna comuna : comunas) {
+            comunaService.deleteById(Long.valueOf(comuna.getId()));
+        }
         ciudadRepository.deleteById(id);
     }
 

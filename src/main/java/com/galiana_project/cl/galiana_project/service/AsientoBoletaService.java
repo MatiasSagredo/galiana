@@ -6,7 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.galiana_project.cl.galiana_project.model.AsientoBoleta;
+import com.galiana_project.cl.galiana_project.model.Boleta;
 import com.galiana_project.cl.galiana_project.repository.AsientoBoletaRepository;
+import com.galiana_project.cl.galiana_project.repository.BoletaRepository;
+
 import jakarta.transaction.Transactional;
 
 @Service
@@ -15,6 +18,12 @@ public class AsientoBoletaService {
 
     @Autowired
     private AsientoBoletaRepository asientoBoletaRepository;
+
+    @Autowired
+    private BoletaService boletaService;
+
+    @Autowired
+    private BoletaRepository boletaRepository;
 
     public List<AsientoBoleta> findAll() {
         return asientoBoletaRepository.findAll();
@@ -29,6 +38,8 @@ public class AsientoBoletaService {
     }
 
     public void deleteById(Long id) {
+        AsientoBoleta asientoBoleta = asientoBoletaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("AsientoBoleta no encontrada"));
         asientoBoletaRepository.deleteById(id);
     }
 

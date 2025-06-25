@@ -3,7 +3,12 @@ package com.galiana_project.cl.galiana_project.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.galiana_project.cl.galiana_project.model.Boleta;
+import com.galiana_project.cl.galiana_project.model.Pago;
+import com.galiana_project.cl.galiana_project.model.Usuario;
 import com.galiana_project.cl.galiana_project.repository.BoletaRepository;
+import com.galiana_project.cl.galiana_project.repository.PagoRepository;
+import com.galiana_project.cl.galiana_project.repository.UsuarioRepository;
+
 import jakarta.transaction.Transactional;
 import java.util.List;
 
@@ -12,6 +17,18 @@ import java.util.List;
 public class BoletaService {
     @Autowired
     private BoletaRepository boletaRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private UsuarioService usuarioService;
+
+    @Autowired
+    private PagoRepository pagoRepository;
+
+    @Autowired
+    private PagoService pagoService;
 
     public List<Boleta> findAll() {
         return boletaRepository.findAll();
@@ -26,6 +43,8 @@ public class BoletaService {
     }
 
     public void deleteById(Long id) {
+        Boleta boleta = boletaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Boleta no encontrada"));
         boletaRepository.deleteById(id);
     }
 

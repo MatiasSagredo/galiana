@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.galiana_project.cl.galiana_project.model.Asiento;
+import com.galiana_project.cl.galiana_project.repository.AsientoBoletaRepository;
 import com.galiana_project.cl.galiana_project.repository.AsientoRepository;
 import jakarta.transaction.Transactional;
 
@@ -13,6 +14,8 @@ public class AsientoService {
 
     @Autowired
     private AsientoRepository asientoRepository;
+
+    private AsientoBoletaRepository asientoBoletaRepository;
 
     public List<Asiento> findAll() {
         return asientoRepository.findAll();
@@ -27,6 +30,9 @@ public class AsientoService {
     }
 
     public void deleteById(Long id) {
+        Asiento asiento = asientoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Asiento no encontrado"));
+        asientoBoletaRepository.deleteByAsiento(asiento);
         asientoRepository.deleteById(id);
     }
 

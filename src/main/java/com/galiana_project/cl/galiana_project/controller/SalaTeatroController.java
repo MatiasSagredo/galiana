@@ -28,7 +28,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class SalaTeatroController {
 
     @Autowired
-    private SalaTeatroService obraTeatroService;
+    private SalaTeatroService salaTeatroService;
 
     @GetMapping()
     @Operation(summary = "Listar salas teatro", description = "Obtiene una lista de todas las salas teatro")
@@ -37,7 +37,7 @@ public class SalaTeatroController {
             @ApiResponse(responseCode = "204", description = "No hay salas teatro disponibles")
     })
     public ResponseEntity<List<SalaTeatro>> listarObrasTeatro() {
-        List<SalaTeatro> obrasTeatro = obraTeatroService.findAll();
+        List<SalaTeatro> obrasTeatro = salaTeatroService.findAll();
         if (obrasTeatro.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
@@ -50,10 +50,10 @@ public class SalaTeatroController {
             @ApiResponse(responseCode = "200", description = "Sala teatro encontrada"),
             @ApiResponse(responseCode = "404", description = "Sala teatro no encontrada")
     })
-    public ResponseEntity<SalaTeatro> buscarObraTeatroPorId(@PathVariable Long id) {
+    public ResponseEntity<SalaTeatro> buscarsalaTeatroPorId(@PathVariable Long id) {
         try {
-            SalaTeatro obraTeatro = obraTeatroService.findById(id);
-            return ResponseEntity.ok(obraTeatro);
+            SalaTeatro salaTeatro = salaTeatroService.findById(id);
+            return ResponseEntity.ok(salaTeatro);
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
@@ -65,9 +65,9 @@ public class SalaTeatroController {
             @ApiResponse(responseCode = "201", description = "Sala teatro creada exitosamente"),
             @ApiResponse(responseCode = "400", description = "Solicitud inválida")
     })
-    public ResponseEntity<SalaTeatro> guardar(@RequestBody SalaTeatro obraTeatro) {
-        SalaTeatro obraTeatroNuevo = obraTeatroService.save(obraTeatro);
-        return ResponseEntity.status(HttpStatus.CREATED).body(obraTeatroNuevo);
+    public ResponseEntity<SalaTeatro> guardar(@RequestBody SalaTeatro salaTeatro) {
+        SalaTeatro salaTeatroNuevo = salaTeatroService.save(salaTeatro);
+        return ResponseEntity.status(HttpStatus.CREATED).body(salaTeatroNuevo);
     }
 
     @PutMapping("/{id}")
@@ -76,10 +76,10 @@ public class SalaTeatroController {
             @ApiResponse(responseCode = "200", description = "Sala teatro actualizada exitosamente"),
             @ApiResponse(responseCode = "404", description = "Sala teatro no encontrada")
     })
-    public ResponseEntity<SalaTeatro> actualizar(@PathVariable Long id, @RequestBody SalaTeatro obraTeatro) {
+    public ResponseEntity<SalaTeatro> actualizar(@PathVariable Long id, @RequestBody SalaTeatro salaTeatro) {
         try {
-            SalaTeatro obraTeatroActualizada = obraTeatroService.updateObraTeatro(id, obraTeatro);
-            return ResponseEntity.ok(obraTeatroActualizada);
+            SalaTeatro salaTeatroActualizada = salaTeatroService.updatesalaTeatro(id, salaTeatro);
+            return ResponseEntity.ok(salaTeatroActualizada);
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
@@ -93,7 +93,7 @@ public class SalaTeatroController {
     })
     public ResponseEntity<SalaTeatro> actualizarParcial(@PathVariable Long id, @RequestBody SalaTeatro obraParcial) {
         try {
-            SalaTeatro obraActualizada = obraTeatroService.patchObraTeatro(id, obraParcial);
+            SalaTeatro obraActualizada = salaTeatroService.patchsalaTeatro(id, obraParcial);
             return ResponseEntity.ok(obraActualizada);
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
@@ -108,7 +108,7 @@ public class SalaTeatroController {
     })
     public ResponseEntity<Void> eliminar(@PathVariable Long id) {
         try {
-            obraTeatroService.deleteById(id);
+            salaTeatroService.deleteById(id);
             return ResponseEntity.noContent().build();
         } catch (Exception e) {
             return ResponseEntity.notFound().build();

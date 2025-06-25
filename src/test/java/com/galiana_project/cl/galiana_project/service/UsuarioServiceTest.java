@@ -81,8 +81,40 @@ public class UsuarioServiceTest {
 
     @Test
     public void testDeleteById() {
+        Usuario usuario = createUsuario();
+        when(usuarioRepository.findById(1L)).thenReturn(java.util.Optional.of(usuario));
         doNothing().when(usuarioRepository).deleteById(1L);
         usuarioService.deleteById(1L);
         verify(usuarioRepository, times(1)).deleteById(1L);
+    }
+
+    @Test
+    public void testFindUsuariosByObraAndTeatro() {
+        Long obraId = 1L;
+        Long teatroId = 2L;
+        List<Usuario> expected = List.of(createUsuario());
+
+        when(usuarioRepository.findUsuariosByObraAndTeatro(obraId, teatroId)).thenReturn(expected);
+
+        List<Usuario> usuarios = usuarioService.findUsuariosByObraAndTeatro(obraId, teatroId);
+
+        assertNotNull(usuarios);
+        assertEquals(1, usuarios.size());
+        assertEquals("Juan Pérez López", usuarios.get(0).getNombres());
+    }
+
+    @Test
+    public void testFindUsuariosByMetodoPagoAndObra() {
+        String metodoPago = "EFECTIVO";
+        Long obraId = 1L;
+        List<Usuario> expected = List.of(createUsuario());
+
+        when(usuarioRepository.findUsuariosByMetodoPagoAndObra(metodoPago, obraId)).thenReturn(expected);
+
+        List<Usuario> usuarios = usuarioService.findUsuariosByMetodoPagoAndObra(metodoPago, obraId);
+
+        assertNotNull(usuarios);
+        assertEquals(1, usuarios.size());
+        assertEquals("Juan Pérez López", usuarios.get(0).getNombres());
     }
 }

@@ -5,8 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.galiana_project.cl.galiana_project.model.Obra;
 import com.galiana_project.cl.galiana_project.model.ObraSala;
+import com.galiana_project.cl.galiana_project.repository.ObraRepository;
 import com.galiana_project.cl.galiana_project.repository.ObraSalaRepository;
+
 import jakarta.transaction.Transactional;
 
 @Service
@@ -15,6 +18,12 @@ public class ObraSalaService {
 
     @Autowired
     private ObraSalaRepository obraSalaRepository;
+
+    @Autowired
+    private ObraService obraService;
+
+    @Autowired
+    private ObraRepository obraRepository;
 
     public List<ObraSala> findAll() {
         return obraSalaRepository.findAll();
@@ -29,6 +38,8 @@ public class ObraSalaService {
     }
 
     public void deleteById(Long id) {
+        ObraSala obraSala = obraSalaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("ObraSala no encontrada"));
         obraSalaRepository.deleteById(id);
     }
 

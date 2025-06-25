@@ -33,91 +33,92 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequestMapping("/api/v2/salasTeatro")
 public class SalaTeatroControllerV2 {
 
-    @Autowired
-    private SalaTeatroService obraTeatroService;
+        @Autowired
+        private SalaTeatroService salaTeatroService;
 
-    @Autowired
-    private SalaTeatroModelAssembler assembler;
+        @Autowired
+        private SalaTeatroModelAssembler assembler;
 
-    @GetMapping(produces = MediaTypes.HAL_JSON_VALUE)
-    @Operation(summary = "Listar sala teatro", description = "Obtiene una lista de todas las sala teatro")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Lista de sala teatro obtenida exitosamente"),
-            @ApiResponse(responseCode = "204", description = "No hay sala teatro disponibles")
-    })
-    public CollectionModel<EntityModel<SalaTeatro>> getAllObrasTeatro() {
-        List<EntityModel<SalaTeatro>> obrasTeatro = obraTeatroService.findAll().stream()
-                .map(assembler::toModel)
-                .collect(Collectors.toList());
-        return CollectionModel.of(obrasTeatro,
-                linkTo(methodOn(SalaTeatroControllerV2.class).getAllObrasTeatro()).withSelfRel());
-    }
-
-    @GetMapping(value = "/{id}", produces = MediaTypes.HAL_JSON_VALUE)
-    @Operation(summary = "Buscar sala teatro por ID", description = "Obtiene una sala teatro específica por su ID")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Sala teatro encontrada"),
-            @ApiResponse(responseCode = "404", description = "Sala teatro no encontrada")
-    })
-    public EntityModel<SalaTeatro> getObraTeatroById(@PathVariable Long id) {
-        SalaTeatro obraTeatro = obraTeatroService.findById(id);
-        return assembler.toModel(obraTeatro);
-    }
-
-    @PostMapping(produces = MediaTypes.HAL_JSON_VALUE)
-    @Operation(summary = "Crear sala teatro", description = "Crea una nueva sala teatro")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Sala teatro creada exitosamente"),
-            @ApiResponse(responseCode = "400", description = "Solicitud inválida")
-    })
-    public ResponseEntity<EntityModel<SalaTeatro>> createObraTeatro(@RequestBody SalaTeatro obraTeatro) {
-        SalaTeatro newObraTeatro = obraTeatroService.save(obraTeatro);
-        return ResponseEntity
-                .created(linkTo(
-                        methodOn(SalaTeatroControllerV2.class).getObraTeatroById(newObraTeatro.getId().longValue()))
-                        .toUri())
-                // .created(linkTo(methodOn(AsientoControllerV2.class).getAsientoById(newAsiento.getId())).toUri())
-                .body(assembler.toModel(newObraTeatro));
-    }
-
-    @PutMapping(value = "/{id}", produces = MediaTypes.HAL_JSON_VALUE)
-    @Operation(summary = "Actualizar sala teatro", description = "Actualiza una sala teatro existente")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Sala teatro actualizada exitosamente"),
-            @ApiResponse(responseCode = "404", description = "Sala teatro no encontrada")
-    })
-    public ResponseEntity<EntityModel<SalaTeatro>> updateObraTeatro(@PathVariable Long id,
-            @RequestBody SalaTeatro obraTeatro) {
-        obraTeatro.setId(id.intValue());
-        // asiento.setId(id);
-        SalaTeatro updatedObraTeatro = obraTeatroService.save(obraTeatro);
-        return ResponseEntity
-                .ok(assembler.toModel(updatedObraTeatro));
-    }
-
-    @PatchMapping(value = "/{id}", produces = MediaTypes.HAL_JSON_VALUE)
-    @Operation(summary = "Actualizar parcialmente sala teatro", description = "Actualiza parcialmente una sala teatro existente")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Sala teatro actualizada parcialmente exitosamente"),
-            @ApiResponse(responseCode = "404", description = "Sala teatro no encontrada")
-    })
-    public ResponseEntity<EntityModel<SalaTeatro>> patchObraTeatro(@PathVariable Long id,
-            @RequestBody SalaTeatro obraTeatro) {
-        SalaTeatro updatedObraTeatro = obraTeatroService.patchObraTeatro(id, obraTeatro);
-        if (updatedObraTeatro == null) {
-            return ResponseEntity.notFound().build();
+        @GetMapping(produces = MediaTypes.HAL_JSON_VALUE)
+        @Operation(summary = "Listar sala teatro", description = "Obtiene una lista de todas las sala teatro")
+        @ApiResponses(value = {
+                        @ApiResponse(responseCode = "200", description = "Lista de sala teatro obtenida exitosamente"),
+                        @ApiResponse(responseCode = "204", description = "No hay sala teatro disponibles")
+        })
+        public CollectionModel<EntityModel<SalaTeatro>> getAllObrasTeatro() {
+                List<EntityModel<SalaTeatro>> obrasTeatro = salaTeatroService.findAll().stream()
+                                .map(assembler::toModel)
+                                .collect(Collectors.toList());
+                return CollectionModel.of(obrasTeatro,
+                                linkTo(methodOn(SalaTeatroControllerV2.class).getAllObrasTeatro()).withSelfRel());
         }
-        return ResponseEntity.ok(assembler.toModel(updatedObraTeatro));
-    }
 
-    @DeleteMapping(value = "/{id}", produces = MediaTypes.HAL_JSON_VALUE)
-    @Operation(summary = "Eliminar sala teatro", description = "Elimina una sala teatro por su ID")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Sala teatro eliminada exitosamente"),
-            @ApiResponse(responseCode = "404", description = "Sala teatro no encontrada")
-    })
-    public ResponseEntity<?> deleteObraTeatro(@PathVariable Long id) {
-        obraTeatroService.deleteById(id);
-        return ResponseEntity.noContent().build();
-    }
+        @GetMapping(value = "/{id}", produces = MediaTypes.HAL_JSON_VALUE)
+        @Operation(summary = "Buscar sala teatro por ID", description = "Obtiene una sala teatro específica por su ID")
+        @ApiResponses(value = {
+                        @ApiResponse(responseCode = "200", description = "Sala teatro encontrada"),
+                        @ApiResponse(responseCode = "404", description = "Sala teatro no encontrada")
+        })
+        public EntityModel<SalaTeatro> getsalaTeatroById(@PathVariable Long id) {
+                SalaTeatro salaTeatro = salaTeatroService.findById(id);
+                return assembler.toModel(salaTeatro);
+        }
+
+        @PostMapping(produces = MediaTypes.HAL_JSON_VALUE)
+        @Operation(summary = "Crear sala teatro", description = "Crea una nueva sala teatro")
+        @ApiResponses(value = {
+                        @ApiResponse(responseCode = "201", description = "Sala teatro creada exitosamente"),
+                        @ApiResponse(responseCode = "400", description = "Solicitud inválida")
+        })
+        public ResponseEntity<EntityModel<SalaTeatro>> createsalaTeatro(@RequestBody SalaTeatro salaTeatro) {
+                SalaTeatro newsalaTeatro = salaTeatroService.save(salaTeatro);
+                return ResponseEntity
+                                .created(linkTo(
+                                                methodOn(SalaTeatroControllerV2.class)
+                                                                .getsalaTeatroById(newsalaTeatro.getId().longValue()))
+                                                .toUri())
+                                // .created(linkTo(methodOn(AsientoControllerV2.class).getAsientoById(newAsiento.getId())).toUri())
+                                .body(assembler.toModel(newsalaTeatro));
+        }
+
+        @PutMapping(value = "/{id}", produces = MediaTypes.HAL_JSON_VALUE)
+        @Operation(summary = "Actualizar sala teatro", description = "Actualiza una sala teatro existente")
+        @ApiResponses(value = {
+                        @ApiResponse(responseCode = "200", description = "Sala teatro actualizada exitosamente"),
+                        @ApiResponse(responseCode = "404", description = "Sala teatro no encontrada")
+        })
+        public ResponseEntity<EntityModel<SalaTeatro>> updatesalaTeatro(@PathVariable Long id,
+                        @RequestBody SalaTeatro salaTeatro) {
+                salaTeatro.setId(id.intValue());
+                // asiento.setId(id);
+                SalaTeatro updatedsalaTeatro = salaTeatroService.save(salaTeatro);
+                return ResponseEntity
+                                .ok(assembler.toModel(updatedsalaTeatro));
+        }
+
+        @PatchMapping(value = "/{id}", produces = MediaTypes.HAL_JSON_VALUE)
+        @Operation(summary = "Actualizar parcialmente sala teatro", description = "Actualiza parcialmente una sala teatro existente")
+        @ApiResponses(value = {
+                        @ApiResponse(responseCode = "200", description = "Sala teatro actualizada parcialmente exitosamente"),
+                        @ApiResponse(responseCode = "404", description = "Sala teatro no encontrada")
+        })
+        public ResponseEntity<EntityModel<SalaTeatro>> patchsalaTeatro(@PathVariable Long id,
+                        @RequestBody SalaTeatro salaTeatro) {
+                SalaTeatro updatedsalaTeatro = salaTeatroService.patchsalaTeatro(id, salaTeatro);
+                if (updatedsalaTeatro == null) {
+                        return ResponseEntity.notFound().build();
+                }
+                return ResponseEntity.ok(assembler.toModel(updatedsalaTeatro));
+        }
+
+        @DeleteMapping(value = "/{id}", produces = MediaTypes.HAL_JSON_VALUE)
+        @Operation(summary = "Eliminar sala teatro", description = "Elimina una sala teatro por su ID")
+        @ApiResponses(value = {
+                        @ApiResponse(responseCode = "204", description = "Sala teatro eliminada exitosamente"),
+                        @ApiResponse(responseCode = "404", description = "Sala teatro no encontrada")
+        })
+        public ResponseEntity<?> deletesalaTeatro(@PathVariable Long id) {
+                salaTeatroService.deleteById(id);
+                return ResponseEntity.noContent().build();
+        }
 }

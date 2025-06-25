@@ -76,6 +76,8 @@ public class BoletaServiceTest {
 
     @Test
     public void testDeleteById() {
+        Boleta boleta = createBoleta();
+        when(boletaRepository.findById(1L)).thenReturn(java.util.Optional.of(boleta));
         doNothing().when(boletaRepository).deleteById(1L);
         boletaService.deleteById(1L);
         verify(boletaRepository, times(1)).deleteById(1L);

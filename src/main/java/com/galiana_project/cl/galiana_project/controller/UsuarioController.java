@@ -128,6 +128,9 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarios);
     }
 
+    @Operation(summary = "Listar usuarios por metodo de pago y obra", description = "Encuentra los usuarios que hayan pagado con un metodo de pago en una obra")
+    @ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Usuarios encontrados exitosamente"),
+            @ApiResponse(responseCode = "204", description = "No hay usuarios disponibles") })
     @GetMapping("/metodoPago/{metodoPago}/obra/{obraId}")
     public ResponseEntity<List<Usuario>> findUsuariosByObraAndTeatro(@PathVariable String metodoPago,
             @PathVariable Long obraId) {

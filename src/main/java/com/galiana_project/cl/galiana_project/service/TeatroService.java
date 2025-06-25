@@ -3,6 +3,8 @@ package com.galiana_project.cl.galiana_project.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.galiana_project.cl.galiana_project.model.SalaTeatro;
 import com.galiana_project.cl.galiana_project.model.Teatro;
 import com.galiana_project.cl.galiana_project.repository.SalaTeatroRepository;
 import com.galiana_project.cl.galiana_project.repository.TeatroRepository;
@@ -16,7 +18,10 @@ public class TeatroService {
     private TeatroRepository teatroRepository;
 
     @Autowired
-    private SalaTeatroRepository obraTeatroRepository;
+    private SalaTeatroService salaTeatroService;
+
+    @Autowired
+    private SalaTeatroRepository salaTeatroRepository;
 
     public List<Teatro> findAll() {
         return teatroRepository.findAll();
@@ -33,8 +38,10 @@ public class TeatroService {
     public void deleteById(Long id) {
         Teatro teatro = teatroRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Teatro no encontrado"));
-
-        obraTeatroRepository.deleteByTeatro(teatro);
+        List<SalaTeatro> salaTeatros = salaTeatroRepository.findByTeatro(teatro);
+        for (SalaTeatro salateatro : salaTeatros) {
+            salaTeatroService.deleteById(Long.valueOf(salateatro.getId()));
+        }
         teatroRepository.deleteById(id);
     }
 

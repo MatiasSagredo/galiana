@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import com.galiana_project.cl.galiana_project.model.Boleta;
 import com.galiana_project.cl.galiana_project.model.TipoUsuario;
 import com.galiana_project.cl.galiana_project.model.Usuario;
 

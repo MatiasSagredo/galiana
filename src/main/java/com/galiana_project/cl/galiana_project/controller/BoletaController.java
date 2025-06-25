@@ -125,6 +125,11 @@ public class BoletaController {
     }
 
     @GetMapping("/usuario/{usuarioId}/precio/{precioTotal}")
+    @Operation(summary = "Buscar boletas por usuario y precio total", description = "Obtiene una lista de boletas filtradas por el ID del usuario y el precio total")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Boletas encontradas exitosamente"),
+            @ApiResponse(responseCode = "204", description = "No hay boletas disponibles para los criterios especificados")
+    })
     public ResponseEntity<List<Boleta>> findByUsuario_IdAndPrecioTotal(@PathVariable Long usuarioId,
             @PathVariable Integer precioTotal) {
         List<Boleta> boletas = boletaService.findByUsuario_IdAndPrecioTotal(usuarioId, precioTotal);

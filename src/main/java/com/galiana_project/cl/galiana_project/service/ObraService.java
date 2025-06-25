@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.galiana_project.cl.galiana_project.model.Obra;
+import com.galiana_project.cl.galiana_project.repository.DirectorRepository;
 import com.galiana_project.cl.galiana_project.repository.ObraRepository;
 import jakarta.transaction.Transactional;
 
@@ -15,6 +16,9 @@ public class ObraService {
 
     @Autowired
     private ObraRepository obraRepository;
+
+    @Autowired
+    private DirectorRepository directorRepository;
 
     public List<Obra> findAll() {
         return obraRepository.findAll();
@@ -29,6 +33,8 @@ public class ObraService {
     }
 
     public void deleteById(Long id) {
+        Obra obra = obraRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Obra no encontrada"));
         obraRepository.deleteById(id);
     }
 

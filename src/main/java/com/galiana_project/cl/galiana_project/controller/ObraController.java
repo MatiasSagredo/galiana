@@ -137,6 +137,10 @@ public class ObraController {
 
     @GetMapping("/teatro/{teatroId}/comuna/{comunaId}")
     @Operation(summary = "Obras por teatro y comuna", description = "Obtiene las obras de un teatro y comuna específicos")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Obras encontradas exitosamente"),
+            @ApiResponse(responseCode = "204", description = "No hay obras disponibles")
+    })
     public ResponseEntity<List<Obra>> listarObrasPorTeatroYComuna(
             @PathVariable Long teatroId,
             @PathVariable Long comunaId) {

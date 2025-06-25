@@ -81,7 +81,7 @@ public class DataLoader implements CommandLineRunner {
     private SalaRepository salaRepository;
 
     @Autowired
-    private SalaTeatroRepository obraTeatroRepository;
+    private SalaTeatroRepository salaTeatroRepository;
 
     @Autowired
     private TeatroRepository teatroRepository;
@@ -141,14 +141,14 @@ public class DataLoader implements CommandLineRunner {
         // Generar ObrasTeatro
         List<Teatro> teatros = teatroRepository.findAll();
         for (int i = 0; i < 20; i++) {
-            SalaTeatro obraTeatro = new SalaTeatro();
-            // obraTeatro.setId(i + 1);
-            obraTeatro.setTeatro(teatros.get(random.nextInt(teatros.size())));
-            obraTeatroRepository.save(obraTeatro);
+            SalaTeatro salaTeatro = new SalaTeatro();
+            // salaTeatro.setId(i + 1);
+            salaTeatro.setTeatro(teatros.get(random.nextInt(teatros.size())));
+            salaTeatroRepository.save(salaTeatro);
         }
 
         // Generar Salas
-        List<SalaTeatro> salaTeatros = obraTeatroRepository.findAll();
+        List<SalaTeatro> salaTeatros = salaTeatroRepository.findAll();
         for (int i = 0; i < 10; i++) {
             Sala sala = new Sala();
             // sala.setId(i + 1);

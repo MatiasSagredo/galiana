@@ -33,8 +33,6 @@ public class PagoService {
     public void deleteById(Long id) {
         Pago pago = pagoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Pago no encontrado"));
-
-        boletaRepository.deleteByPago(pago);
         pagoRepository.deleteById(id);
     }
 

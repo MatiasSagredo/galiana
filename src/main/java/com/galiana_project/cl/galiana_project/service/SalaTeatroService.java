@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.galiana_project.cl.galiana_project.model.Sala;
 import com.galiana_project.cl.galiana_project.model.SalaTeatro;
+import com.galiana_project.cl.galiana_project.repository.SalaRepository;
 import com.galiana_project.cl.galiana_project.repository.SalaTeatroRepository;
 import jakarta.transaction.Transactional;
 
@@ -14,37 +16,49 @@ import jakarta.transaction.Transactional;
 public class SalaTeatroService {
 
     @Autowired
-    private SalaTeatroRepository obraTeatroRepository;
+    private SalaTeatroRepository salaTeatroRepository;
+
+    @Autowired
+    private SalaRepository salaRepository;
+
+    @Autowired
+    private SalaService salaService;
 
     public List<SalaTeatro> findAll() {
-        return obraTeatroRepository.findAll();
+        return salaTeatroRepository.findAll();
     }
 
     public SalaTeatro findById(Long id) {
-        return obraTeatroRepository.findById(id).get();
+        return salaTeatroRepository.findById(id).get();
     }
 
-    public SalaTeatro save(SalaTeatro obraTeatro) {
-        return obraTeatroRepository.save(obraTeatro);
+    public SalaTeatro save(SalaTeatro salaTeatro) {
+        return salaTeatroRepository.save(salaTeatro);
     }
 
     public void deleteById(Long id) {
-        obraTeatroRepository.deleteById(id);
+        SalaTeatro salaTeatro = salaTeatroRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Teatro no encontrado"));
+        List<Sala> salas = salaRepository.findBySalaTeatro(salaTeatro);
+        for (Sala sala : salas) {
+            salaService.deleteById(Long.valueOf(sala.getId()));
+        }
+        salaTeatroRepository.deleteById(id);
     }
 
-    public SalaTeatro updateObraTeatro(Long id, SalaTeatro obraTeatro) {
-        SalaTeatro obraTeatroToUpdate = obraTeatroRepository.findById(id).get();
-        if (obraTeatroToUpdate != null) {
-            obraTeatroToUpdate.setId(obraTeatro.getId());
-            obraTeatroToUpdate.setTeatro(obraTeatro.getTeatro());
-            return obraTeatroRepository.save(obraTeatroToUpdate);
+    public SalaTeatro updatesalaTeatro(Long id, SalaTeatro salaTeatro) {
+        SalaTeatro salaTeatroToUpdate = salaTeatroRepository.findById(id).get();
+        if (salaTeatroToUpdate != null) {
+            salaTeatroToUpdate.setId(salaTeatro.getId());
+            salaTeatroToUpdate.setTeatro(salaTeatro.getTeatro());
+            return salaTeatroRepository.save(salaTeatroToUpdate);
         } else {
             return null;
         }
     }
 
-    public SalaTeatro patchObraTeatro(Long id, SalaTeatro obraParcial) {
-        SalaTeatro obraToUpdate = obraTeatroRepository.findById(id).get();
+    public SalaTeatro patchsalaTeatro(Long id, SalaTeatro obraParcial) {
+        SalaTeatro obraToUpdate = salaTeatroRepository.findById(id).get();
 
         if (obraToUpdate != null) {
             if (obraParcial.getId() != null) {
@@ -53,7 +67,7 @@ public class SalaTeatroService {
             if (obraParcial.getTeatro() != null) {
                 obraToUpdate.setTeatro(obraParcial.getTeatro());
             }
-            return obraTeatroRepository.save(obraToUpdate);
+            return salaTeatroRepository.save(obraToUpdate);
         } else {
             return null;
         }

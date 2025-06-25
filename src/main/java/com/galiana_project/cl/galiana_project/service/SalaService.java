@@ -5,8 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.galiana_project.cl.galiana_project.model.Asiento;
+import com.galiana_project.cl.galiana_project.model.ObraSala;
 import com.galiana_project.cl.galiana_project.model.Sala;
 import com.galiana_project.cl.galiana_project.repository.AsientoRepository;
+import com.galiana_project.cl.galiana_project.repository.ObraSalaRepository;
 import com.galiana_project.cl.galiana_project.repository.SalaRepository;
 import jakarta.transaction.Transactional;
 
@@ -19,6 +22,15 @@ public class SalaService {
 
     @Autowired
     private AsientoRepository asientoRepository;
+
+    @Autowired
+    private AsientoService asientoService;
+
+    @Autowired
+    private ObraSalaRepository obraSalaRepository;
+
+    @Autowired
+    private ObraSalaService obraSalaService;
 
     public List<Sala> findAll() {
         return salaRepository.findAll();
@@ -35,8 +47,14 @@ public class SalaService {
     public void deleteById(Long id) {
         Sala sala = salaRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Sala no encontrada"));
-
-        asientoRepository.deleteBySala(sala);
+        List<Asiento> asientos = asientoRepository.findBySala(sala);
+        List<ObraSala> obrasSala = obraSalaRepository.findBySala(sala);
+        for (Asiento asiento : asientos) {
+            asientoService.deleteById(Long.valueOf(asiento.getId()));
+        }
+        for (ObraSala obraSala : obrasSala) {
+            obraSalaService.deleteById(Long.valueOf(obraSala.getId()));
+        }
         salaRepository.deleteById(id);
     }
 

@@ -12,17 +12,22 @@ import com.galiana_project.cl.galiana_project.model.SalaTeatro;
 @Component
 public class SalaTeatroModelAssembler implements RepresentationModelAssembler<SalaTeatro, EntityModel<SalaTeatro>> {
 
-    @Override
-    public EntityModel<SalaTeatro> toModel(SalaTeatro obraTeatro) {
-        return EntityModel.of(obraTeatro,
-                linkTo(methodOn(SalaTeatroControllerV2.class).getObraTeatroById(obraTeatro.getId().longValue()))
-                        .withSelfRel(),
-                linkTo(methodOn(SalaTeatroControllerV2.class).getAllObrasTeatro()).withRel("obraTeatro"),
-                linkTo(methodOn(SalaTeatroControllerV2.class).updateObraTeatro(obraTeatro.getId().longValue(),
-                        obraTeatro)).withRel("actualizar"),
-                linkTo(methodOn(SalaTeatroControllerV2.class).deleteObraTeatro(obraTeatro.getId().longValue()))
-                        .withRel("eliminar"),
-                linkTo(methodOn(SalaTeatroControllerV2.class).patchObraTeatro(obraTeatro.getId().longValue(),
-                        obraTeatro)).withRel("actualizar-parcial"));
-    }
+        @Override
+        public EntityModel<SalaTeatro> toModel(SalaTeatro salaTeatro) {
+                return EntityModel.of(salaTeatro,
+                                linkTo(methodOn(SalaTeatroControllerV2.class)
+                                                .getsalaTeatroById(salaTeatro.getId().longValue()))
+                                                .withSelfRel(),
+                                linkTo(methodOn(SalaTeatroControllerV2.class).getAllObrasTeatro())
+                                                .withRel("salaTeatro"),
+                                linkTo(methodOn(SalaTeatroControllerV2.class).updatesalaTeatro(
+                                                salaTeatro.getId().longValue(),
+                                                salaTeatro)).withRel("actualizar"),
+                                linkTo(methodOn(SalaTeatroControllerV2.class)
+                                                .deletesalaTeatro(salaTeatro.getId().longValue()))
+                                                .withRel("eliminar"),
+                                linkTo(methodOn(SalaTeatroControllerV2.class).patchsalaTeatro(
+                                                salaTeatro.getId().longValue(),
+                                                salaTeatro)).withRel("actualizar-parcial"));
+        }
 }
